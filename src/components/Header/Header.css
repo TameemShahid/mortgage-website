@@ -1,0 +1,78 @@
+#navbar {
+  background-color: rgba(255, 255, 255, 0);
+  max-height: 86px;
+}
+
+#header_logo {
+  max-width: 242px;
+  max-height: 70px;
+}
+
+#navbarNav li {
+  margin-right: 20px;
+  font-size: 18px;
+}
+
+#navbarNav button {
+  width: 100%;
+  height: 48px;
+  margin-right: 20px;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 0;
+  color: white;
+}
+
+#navbarNav button:hover {
+  background-color: #cecece;
+  border-color: #cecece;
+}
+
+#navbarNav ul li a {
+  color: #616161;
+}
+
+.nav-link {
+  padding: 15px 0px 8.5px 0px !important;
+}
+
+.nav-link strong {
+  position: relative;
+  display: inline-block;
+  color: white; /* Text color */
+}
+
+.nav-link strong:hover {
+  color: #b8b8b9;
+}
+
+.nav-link strong::before {
+  content: '';
+  position: absolute;
+  bottom: -5px; /* Position the border 7px below the text */
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 100%;
+  height: 2px; /* Height of the border */
+  background-color: #b8b8b9; /* Border color */
+  transition: transform 0.3s ease;
+  color: #b8b8b9;
+}
+
+.nav-link strong:hover::before {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* State when scrolled */
+.navbar.scrolled .nav-link strong {
+  color: #7f7f7f !important; /* Text color is #b8b8b9 when scrolled */
+}
+
+/* Hover state when scrolled */
+.navbar.scrolled .nav-link strong:hover {
+  color: #53b6d8 !important; /* Text color changes to blue on hover */
+}
+
+.navbar.scrolled .nav-link strong:hover::before {
+  background-color: #53b6d8; /* Border color changes to blue on hover */
+}
