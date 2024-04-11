@@ -1,6 +1,10 @@
 #navbar {
   background-color: rgba(255, 255, 255, 0);
   max-height: 86px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  width: 100%;
 }
 
 #header_logo {
@@ -21,6 +25,8 @@
   font-weight: 700;
   padding: 0;
   color: white;
+  background-color: #2aa6d0;
+  border-color: #2aa6d0;
 }
 
 #navbarNav button:hover {
@@ -68,6 +74,14 @@
   color: #7f7f7f !important; /* Text color is #b8b8b9 when scrolled */
 }
 
+.navbar.scrolled span {
+  background-color: black !important; /* Text color is #b8b8b9 when scrolled */
+}
+
+.navbar.scrolled p {
+  color: black !important; /* Text color is #b8b8b9 when scrolled */
+}
+
 /* Hover state when scrolled */
 .navbar.scrolled .nav-link strong:hover {
   color: #53b6d8 !important; /* Text color changes to blue on hover */
@@ -75,4 +89,62 @@
 
 .navbar.scrolled .nav-link strong:hover::before {
   background-color: #53b6d8; /* Border color changes to blue on hover */
+}
+
+#navbarNav.collapsed {
+  display: none !important;
+}
+
+.hamburger {
+  cursor: pointer;
+  display: inline-block;
+  width: 22px;
+  height: 17px;
+  position: relative;
+  right: 50px;
+  margin-right: 20px;
+}
+
+.bar {
+  height: 3px;
+  width: 100%;
+  background-color: white;
+  position: absolute;
+  left: 0;
+  transition: all 0.3s ease;
+}
+
+.bar:nth-child(1) {
+  top: 0;
+}
+.bar:nth-child(2) {
+  top: 6px;
+}
+.bar:nth-child(3) {
+  top: 12px;
+}
+
+/* Transform bars into X */
+.hamburger.active .bar:nth-child(1) {
+  top: 5px;
+  transform: rotate(135deg);
+}
+
+.hamburger.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active .bar:nth-child(3) {
+  top: 5px;
+  transform: rotate(-135deg);
+}
+
+.hamburger p {
+  position: relative;
+  left: 30px;
+  color: white;
+  font-size: 22px;
+  text-transform: uppercase;
+  top: -9px;
+  font-weight: 300;
 }
