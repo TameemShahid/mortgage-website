@@ -9,7 +9,7 @@ const MobileMenu = ({ isMenuOpen, toggleMenu }) => {
   };
 
   return (
-    <div className={`side-menu ${isMenuOpen ? 'open' : ''}`}>
+    <div style={{ zIndex: '9999' }} className={`side-menu ${isMenuOpen ? 'open' : ''}`}>
       <div className='close-icon-container'>
         <button onClick={toggleMenu}>
           <span className='close-icon'>×</span>
