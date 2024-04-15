@@ -3,6 +3,10 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  background-color: #f7f7f7;
+  padding: 100px 0;
+  position: relative;
+  top: -86px;
 }
 
 .intro-container h1 {
