@@ -3,13 +3,21 @@ import video from '../../assets/Home_Background_Video.mp4';
 
 const VideoBackground = ({ isMenuOpen }) => {
   const [width, setWidth] = useState(window.innerWidth);
+  const [containerHeight, setContainerHeight] = useState('133vh');
 
   const handleResize = () => {
     setWidth(window.innerWidth);
+    handleContainerSize();
+  }
+
+  const handleContainerSize = () => {
+    setContainerHeight(document.getElementById('tagline').offsetHeight);
   }
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);
+
+    handleContainerSize();
 
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -27,7 +35,7 @@ const VideoBackground = ({ isMenuOpen }) => {
       <video autoPlay loop muted
         style={{
           width: '100%',
-          height: width >= 768 ? '100vh' : '133vh',
+          height: containerHeight,
           objectFit: 'none'
         }}>
         <source src={video} type="video/mp4" />
@@ -39,7 +47,7 @@ const VideoBackground = ({ isMenuOpen }) => {
           top: '0',
           left: '0',
           width: '100%',
-          height: '100vh',
+          height: containerHeight,
           backgroundColor: 'rgba(0, 0, 0, 0.3)',
           zIndex: '0'
         }}

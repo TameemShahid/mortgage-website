@@ -15,12 +15,14 @@ const Tagline = () => {
       window.removeEventListener('resize', handleResize);
     }
   }, [])
+
   return (
     <>
       <div
+        id='tagline'
         style={{
-          position: 'absolute',
-          top: '0',
+          position: 'relative',
+          top: '-86px',
           left: '0',
           padding: `95px ${width >= 425 ? '3rem' : '1.5rem'}`,
           display: 'flex',
@@ -59,6 +61,7 @@ const Tagline = () => {
             rowGap: '15px',
             minWidth: 0
           }}
+          className="tagline-buttons"
         >
           <button style={{ height: '70px', width: '303px', fontSize: '24px', fontWeight: '500', color: 'white', textTransform: 'uppercase', backgroundColor: '#2aa6d0', borderColor: '#2aa6d0' }} type="button" className='btn btn-info'>Get Preapproved</button>
           <button style={{ height: '70px', width: '303px', fontSize: '24px', fontWeight: '500', color: 'white', textTransform: 'uppercase', backgroundColor: '#2aa6d0', borderColor: '#2aa6d0' }} type="button" className='btn btn-info'>Request A Quote</button>

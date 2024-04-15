@@ -35,7 +35,8 @@ const Navbar = ({ toggleMenu, isMenuOpen }) => {
         top: '0',
         backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.8)' : 'rgba(0, 0, 0, 0)',
         transform: isMenuOpen ? 'translateX(-210px)' : 'translateX(0px)',
-        zIndex: '5'
+        zIndex: '5',
+        boxShadow: 'rgba(0, 0, 0, 0.1) 0px 2px 5px 0px'
       }}
       id='navbar-container'
     >
