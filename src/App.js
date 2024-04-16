@@ -6,6 +6,7 @@ import VideoBackground from './components/VideoBackground/VideoBackground.jsx';
 import Tagline from './components/Tagline/Tagline.jsx';
 import Intro from './components/Intro/Intro.jsx';
 import FeaturesSection from './components/FeaturesSection/FeaturesSection.jsx';
+import Questionnaire from './components/Questionnaire/Questionnaire.jsx';
 
 const App = () => {
    const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -43,6 +44,7 @@ const App = () => {
             <Tagline />
             <Intro width={width} />
             <FeaturesSection width={width} />
+            <Questionnaire width={width} />
          </div>
          <MobileMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
       </div>
