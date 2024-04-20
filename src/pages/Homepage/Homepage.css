@@ -1,0 +1,32 @@
+.main-content.dimmed {
+  transform: translateX(-210px); /* Push content to the left */
+}
+
+.main-content {
+  transition: transform 0.3s ease;
+  height: 100%;
+  height: -moz-available; /* WebKit-based browsers will ignore this. */
+  height: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
+  height: fill-available;
+}
+
+#black-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: inherit;
+  height: inherit;
+  z-index: 999;
+  background: rgba(
+    0,
+    0,
+    0,
+    0.6
+  ); /* Adjust the opacity (last value) as needed */
+}
+
+button:hover {
+  background-color: #b7b7b7 !important;
+  border-color: #b7b7b7 !important;
+  color: white !important;
+}
