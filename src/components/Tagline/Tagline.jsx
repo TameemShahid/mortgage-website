@@ -22,14 +22,14 @@ const Tagline = () => {
         id='tagline'
         style={{
           position: 'relative',
-          top: '-86px',
+          top: '0',
           left: '0',
           padding: `95px ${width >= 425 ? '3rem' : '1.5rem'}`,
           display: 'flex',
           flexWrap: 'wrap',
           alignItems: 'center',
           alignContent: 'center',
-          minHeight: '100vh',
+          minHeight: 'calc(100vh + 86px)',
           width: '100%'
         }}
       >

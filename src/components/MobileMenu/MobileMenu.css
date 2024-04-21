@@ -17,12 +17,19 @@
   border-bottom: 0.5px solid #e0e0e0;
 }
 
+.sidemenu-close-button:hover {
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
 .option-container {
   padding: 14.4px 20px;
   border-bottom: 1px solid #e0e0e0;
   font-size: 16px;
   font-weight: 800 !important;
   text-transform: uppercase;
+  display: block;
+  text-decoration: none;
+  color: black;
 }
 
 .option-container:hover {

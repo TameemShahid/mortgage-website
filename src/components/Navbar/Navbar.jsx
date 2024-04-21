@@ -1,6 +1,7 @@
 import whiteLogo from '../../assets/header_logo_white.webp';
 import blueLogo from '../../assets/header_logo.webp';
 import { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = ({ toggleMenu, isMenuOpen }) => {
@@ -31,12 +32,12 @@ const Navbar = ({ toggleMenu, isMenuOpen }) => {
       style={{
         height: '86px',
         width: '100%',
-        position: 'sticky',
+        position: 'fixed',
         top: '0',
         backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.8)' : 'rgba(0, 0, 0, 0)',
         transform: isMenuOpen ? 'translateX(-210px)' : 'translateX(0px)',
         zIndex: '5',
-        boxShadow: 'rgba(0, 0, 0, 0.1) 0px 2px 5px 0px'
+        boxShadow: scrolled ? 'rgba(0, 0, 0, 0.1) 0px 2px 5px 0px' : ''
       }}
       id='navbar-container'
     >
@@ -54,16 +55,16 @@ const Navbar = ({ toggleMenu, isMenuOpen }) => {
             justifyContent: 'space-between'
           }}
         >
-          <a href='#' style={{ width: width <= 425 ? '50%' : 'inherit' }}>
+          <Link to='/' style={{ width: width <= 425 ? '50%' : 'inherit' }}>
             <img
               src={scrolled ? blueLogo : whiteLogo}
               alt="Company Logo"
               style={{ width: '100%', maxWidth: '242px', maxHeight: '70px' }}
             />
-          </a>
+          </Link>
           <div style={{ display: width >= 1350 ? 'flex' : 'none', justifyContent: 'flex-end' }} className={`list-menu ${scrolled ? 'scrolled' : ''}`}>
             <ul style={{ listStyle: 'none', margin: '0' }}>
-              <li className='list-item'><a href="#">Learn</a></li>
+              <li className='list-item'><Link to="/learning-center">Learn</Link></li>
               <li><a href="#">Pre-Qualify</a></li>
               <li><a href="#">Calculator</a></li>
               <li><a href="#">Loan Options</a></li>

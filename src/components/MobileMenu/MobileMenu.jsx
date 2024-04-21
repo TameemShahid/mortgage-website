@@ -1,5 +1,6 @@
 import './MobileMenu.css';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const MobileMenu = ({ isMenuOpen, toggleMenu }) => {
   const [isAboutUsOpen, setIsAboutUsOpen] = useState(false);
@@ -11,13 +12,13 @@ const MobileMenu = ({ isMenuOpen, toggleMenu }) => {
   return (
     <div style={{ zIndex: '9999' }} className={`side-menu ${isMenuOpen ? 'open' : ''}`}>
       <div className='close-icon-container'>
-        <button onClick={toggleMenu}>
+        <button onClick={toggleMenu} className='sidemenu-close-button'>
           <span className='close-icon'>×</span>
         </button>
       </div>
-      <div className='option-container'>
+      <Link className='option-container' to='/learning-center'>
         Learn
-      </div>
+      </Link>
       <div className='option-container'>
         Pre-Qualify
       </div>

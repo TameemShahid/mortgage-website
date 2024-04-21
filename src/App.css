@@ -1,0 +1,14 @@
+#black-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: inherit;
+  height: inherit;
+  z-index: 999;
+  background: rgba(
+    0,
+    0,
+    0,
+    0.6
+  ); /* Adjust the opacity (last value) as needed */
+}

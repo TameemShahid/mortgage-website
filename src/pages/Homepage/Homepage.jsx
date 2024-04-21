@@ -2,7 +2,6 @@ import './Homepage.css';
 import { useState, useEffect } from 'react';
 import houseImage from '../../assets/EHO-dark.png';
 import Intro from '../../components/Intro/Intro.jsx';
-import Navbar from '../../components/Navbar/Navbar.jsx';
 import Tagline from '../../components/Tagline/Tagline.jsx';
 import MobileMenu from '../../components/MobileMenu/MobileMenu.jsx';
 import Questionnaire from '../../components/Questionnaire/Questionnaire.jsx';
@@ -32,14 +31,7 @@ const Homepage = () => {
   }, [])
 
   return (
-    <div style=
-      {{
-        width: '100%',
-        height: '5000px'
-      }}
-    >
-      <div id='black-overlay' style={{ display: isMenuOpen ? 'block' : 'none' }} onClick={toggleMenu}></div>
-      <Navbar isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+    <div>
       <div
         className={`main-content ${isMenuOpen ? 'dimmed' : ''}`}
       >
@@ -317,7 +309,6 @@ const Homepage = () => {
           }}>The content provided within this website is presented for information purposes only. This is not a commitment to lend or extend credit. Information and/or dates are subject to change without notice. All loans are subject to credit approval. Other restrictions may apply. Mortgage loans may be arranged through third party providers.</p>
         </div>
       </div>
-      <MobileMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
     </div>
   )
 }
