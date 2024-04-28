@@ -1,13 +1,15 @@
 import whiteLogo from '../../assets/header_logo_white.webp';
 import blueLogo from '../../assets/header_logo.webp';
 import { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = ({ toggleMenu, isMenuOpen }) => {
   const [scrolled, setScrolled] = useState(false);
   const [showSubMenu, setShowSubMenu] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
+  const location = useLocation();
+  const { hash, pathname, search } = location;
 
   const handleResize = () => {
     setWidth(window.innerWidth);
@@ -57,12 +59,12 @@ const Navbar = ({ toggleMenu, isMenuOpen }) => {
         >
           <Link to='/' style={{ width: width <= 425 ? '50%' : 'inherit' }}>
             <img
-              src={scrolled ? blueLogo : whiteLogo}
+              src={pathname === '/' ? scrolled ? blueLogo : whiteLogo : blueLogo}
               alt="Company Logo"
               style={{ width: '100%', maxWidth: '242px', maxHeight: '70px' }}
             />
           </Link>
-          <div style={{ display: width >= 1350 ? 'flex' : 'none', justifyContent: 'flex-end' }} className={`list-menu ${scrolled ? 'scrolled' : ''}`}>
+          <div style={{ display: width >= 1350 ? 'flex' : 'none', justifyContent: 'flex-end' }} className={`list-menu ${pathname === '/' ? scrolled ? 'scrolled' : '' : 'scrolled'}`}>
             <ul style={{ listStyle: 'none', margin: '0' }}>
               <li className='list-item'><Link to="/learning-center">Learn</Link></li>
               <li><a href="#">Pre-Qualify</a></li>
@@ -88,7 +90,7 @@ const Navbar = ({ toggleMenu, isMenuOpen }) => {
           </div>
           <a href="#"
             style={{ display: width < 1350 ? 'block' : 'none', textDecoration: 'none' }}
-            className={`hamburger ${scrolled ? 'scrolled' : ''} ${isMenuOpen ? 'active' : ''}`}
+            className={`hamburger ${pathname === '/' ? scrolled ? 'scrolled' : '' : 'scrolled'} ${isMenuOpen ? 'active' : ''}`}
             onClick={toggleMenu}>
             <span className='bar'></span>
             <span className='bar'></span>

@@ -52,7 +52,7 @@ const Tagline = () => {
             marginBottom: '45px',
             maxWidth: '500px'
           }}></div>
-        <hr style={{ width: '100%', margin: 0 }} />
+        <hr style={{ width: '100%', margin: 0, visibility: 'hidden' }} />
         <div
           style={{
             display: 'flex',
