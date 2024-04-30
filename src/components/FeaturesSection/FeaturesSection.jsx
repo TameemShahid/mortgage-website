@@ -29,7 +29,7 @@ const FeaturesSection = ({ width }) => {
         }}
       ></img>
       <div style={{
-        width: '747px',
+        minWidth: width <= 428 ? '100px' : '747px',
         display: 'flex',
         flexWrap: 'wrap',
         padding: '0 25px',

@@ -69,7 +69,7 @@ const Navbar = ({ toggleMenu, isMenuOpen }) => {
               <li className='list-item'><Link to="/learning-center">Learn</Link></li>
               <li><a href="#">Pre-Qualify</a></li>
               <li><a href="#">Calculator</a></li>
-              <li><a href="#">Loan Options</a></li>
+              <li className='list-item'><Link to="/loan-options">Loan Options</Link></li>
               <li
                 style={{ height: '50px' }}
                 onMouseEnter={() => setShowSubMenu(true)}

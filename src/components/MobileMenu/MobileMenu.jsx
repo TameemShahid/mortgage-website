@@ -25,9 +25,9 @@ const MobileMenu = ({ isMenuOpen, toggleMenu }) => {
       <div className='option-container'>
         Calculator
       </div>
-      <div className='option-container'>
+      <Link className='option-container' to='/loan-options'>
         Loan Options
-      </div>
+      </Link>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #e0e0e0' }}>
         <div className='option-container' style={{ borderBottom: 0 }}>
           About Us

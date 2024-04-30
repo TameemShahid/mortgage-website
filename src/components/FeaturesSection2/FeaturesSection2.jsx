@@ -22,7 +22,7 @@ const FeaturesSection2 = ({ width }) => {
         flexWrap: 'wrap',
         maxWidth: '100vh',
         textAlign: 'center',
-        flexDirection: 'column',
+        // flexDirection: 'column',
         alignItems: 'space-between'
       }}>
         <div style={{ height: '30px' }}></div>
