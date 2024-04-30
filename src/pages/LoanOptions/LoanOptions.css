@@ -4,7 +4,7 @@
   position: relative;
 }
 
-.section-1-container {
+.loan-wrapper .section-1-container {
   width: 100vw;
   height: 480px;
   display: flex;
@@ -12,7 +12,7 @@
   background-color: rgb(249, 249, 249);
 }
 
-.section-1-content {
+.loan-wrapper .section-1-content {
   width: 90%;
   display: flex;
   flex-wrap: wrap;
@@ -20,28 +20,28 @@
   justify-content: center;
 }
 
-.section-1-content > .col-6 {
+.loan-wrapper .section-1-content > .col-6 {
   max-width: 680px;
 }
 
-.text-column > h1 {
+.loan-wrapper .text-column > h1 {
   font-size: 35px;
   font-weight: 700;
 }
 
-.text-column > p {
+.loan-wrapper .text-column > p {
   font-size: 18px;
   font-weight: 500;
   padding-right: 30px;
 }
 
-.btn-container {
+.loan-wrapper .btn-container {
   display: flex;
   column-gap: 15px;
   align-items: center;
 }
 
-.text-column button {
+.loan-wrapper .text-column button {
   color: white;
   font-weight: 500;
   padding: 15px 35px;
@@ -52,25 +52,25 @@
   background-color: #2aa6d0;
 }
 
-.text-column .btn-alternative {
+.loan-wrapper .text-column .btn-alternative {
   color: rgb(189, 189, 189);
   border-color: rgb(189, 189, 189);
   background-color: rgba(0, 0, 0, 0);
 }
 
-.section-1-img {
+.loan-wrapper .section-1-img {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
     rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 }
 
-.section-2-container {
+.loan-wrapper .section-2-container {
   width: 100vw;
   display: flex;
   justify-content: center;
   background-color: white;
 }
 
-.section-2-content {
+.loan-wrapper .section-2-content {
   width: 90%;
   display: flex;
   flex-wrap: wrap;
@@ -81,12 +81,12 @@
   justify-content: center;
 }
 
-.heading-container {
+.loan-wrapper .heading-container {
   flex-basis: 100%;
   max-width: 1040px;
 }
 
-.section-2-content h1 {
+.loan-wrapper .section-2-content h1 {
   z-index: 1;
   font-size: 40px;
   font-weight: 700;
@@ -98,7 +98,7 @@
   border-bottom: 2px solid rgb(42, 166, 208);
 }
 
-.grey-border-bottom {
+.loan-wrapper .grey-border-bottom {
   top: -2px;
   flex-basis: 100%;
   text-align: center;
@@ -106,12 +106,12 @@
   border-bottom: 2px solid rgb(238, 238, 238);
 }
 
-.spacer {
+.loan-wrapper .spacer {
   height: 84px;
   flex-basis: 100%;
 }
 
-.cards-container {
+.loan-wrapper .cards-container {
   /* padding: 0;
   display: flex;
   row-gap: 30px;
@@ -126,26 +126,26 @@
 }
 
 @media screen and (max-width: 1025px) {
-  .cards-container {
+  .loan-wrapper .cards-container {
     padding: 50px;
   }
 }
 
 @media screen and (max-width: 769px) {
-  .cards-container {
+  .loan-wrapper .cards-container {
     padding: 38.4px;
     grid-template-columns: 1fr 1fr;
   }
 }
 
 @media screen and (max-width: 426px) {
-  .cards-container {
+  .loan-wrapper .cards-container {
     padding: 15px;
     grid-template-columns: 1fr;
   }
 }
 
-.card {
+.loan-wrapper .card {
   width: 100%;
   border: none;
   height: 100%;
@@ -154,37 +154,37 @@
   box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
 }
 
-.card:hover {
+.loan-wrapper .card:hover {
   transform: translateY(-10px);
 }
 
-.card-title {
+.loan-wrapper .card-title {
   max-width: 35px;
   max-height: 35px;
 }
 
-.card-title > span::before {
+.loan-wrapper .card-title > span::before {
   font-size: 35px;
   color: #2aa6d0;
 }
 
-.card-body > h5 {
+.loan-wrapper .card-body > h5 {
   margin-bottom: 20px;
 }
 
-.card-body > h2 {
+.loan-wrapper .card-body > h2 {
   color: #2aa6d0;
   font-weight: 700;
   font-size: 1.5em;
   padding-bottom: 10px;
 }
 
-.card-text {
+.loan-wrapper .card-text {
   font-weight: 300;
   font-weight: 18px;
 }
 
-.section-3-container {
+.loan-wrapper .section-3-container {
   width: 100vw;
   display: flex;
   flex-wrap: wrap;
@@ -194,7 +194,7 @@
   background-color: rgb(249, 249, 249);
 }
 
-.section-3-container > h1 {
+.loan-wrapper .section-3-container > h1 {
   width: 700px;
   font-size: 55px;
   color: #222222;
@@ -204,17 +204,17 @@
 }
 
 @media screen and (max-width: 426px) {
-  .section-3-container > h1 {
+  .loan-wrapper .section-3-container > h1 {
     font-size: 35px;
   }
 }
 
-.section-3-container > p {
+.loan-wrapper .section-3-container > p {
   z-index: 2;
   max-width: 500px;
   font-weight: 300;
 }
 
-.divider {
+.loan-wrapper .divider {
   flex-basis: 100%;
 }
