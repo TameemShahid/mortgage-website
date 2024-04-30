@@ -1,4 +1,5 @@
 import './App.css';
+import './assets/font-awesome.css';
 import { useEffect, useState } from 'react';
 import Navbar from './components/Navbar/Navbar.jsx';
 import Homepage from './pages/Homepage/Homepage.jsx';
@@ -11,6 +12,7 @@ import {
    Link
 } from 'react-router-dom';
 import Learn from './pages/Learn/Learn.jsx';
+import LoanOptions from './pages/LoanOptions/LoanOptions.jsx';
 
 const App = () => {
    const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -47,6 +49,7 @@ const App = () => {
             <Routes>
                <Route path='/' element={<Homepage />} />
                <Route path='/learning-center' element={<Learn />} />
+               <Route path='/loan-options' element={<LoanOptions />} />
             </Routes>
             <MobileMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
          </div>

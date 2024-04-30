@@ -27,7 +27,7 @@ const Questionnaire = ({ width }) => {
         flexWrap: 'wrap',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#f7f7f7',
+        backgroundColor: '#f9f9f9',
         padding: '100px 0 50px',
         position: 'relative',
         top: '-86px'
@@ -72,7 +72,7 @@ const Questionnaire = ({ width }) => {
           maxWidth: '680px',
           flexWrap: 'wrap',
         }}>
-          <div style={{ color: 'rgb(42, 166, 208', fontSize: width < 430 ? '24px' : '32px', fontWeight: '400' }}>What are your goals? <br />
+          <div style={{ color: 'rgb(42, 166, 208)', fontSize: width < 430 ? '24px' : '32px', fontWeight: '400' }}>What are your goals? <br />
             We are committed to helping you reach them.
           </div>
           <div style={{ flexBasis: '100%' }}></div>
