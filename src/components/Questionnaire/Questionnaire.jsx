@@ -8,6 +8,33 @@ const Questionnaire = ({ width }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [progressWidth, setProgressWidth] = useState('0%');
 
+  const questions = () => {
+    switch (currentQuestion) {
+      case 0:
+        return (
+          <>
+            <h1>What are your goals? <br />We are committed to helping you reach them.</h1>
+            <div style={{ height: '30px' }} />
+            <div className='question-1-options d-grid gap-5'>
+              <div className='text-center'>
+                <span className='question-1-image' style={{ backgroundImage: `url(${purchaseLogo})` }}></span>
+                <div style={{ height: '30px' }} />
+                <button className='btn btn-info question-1-button'>I want to purchase</button>
+              </div>
+              <div className='text-center'>
+                <span className='question-1-image' style={{ backgroundImage: `url(${refinanceLogo})` }}></span>
+                <div style={{ height: '30px' }} />
+                <button className='btn btn-info question-1-button'>I want to refinance</button>
+              </div>
+              <div style={{ minHeight: '32px' }} />
+            </div>
+          </>
+        )
+      default:
+        break;
+    }
+  }
+
   useEffect(() => {
     // Calculate the width of the progress bar based on the current question
     const updatedWidth = ((currentQuestion + 1) / totalQuestions) * 100 + '%';
@@ -19,6 +46,17 @@ const Questionnaire = ({ width }) => {
       setCurrentQuestion(current => current + 1);
     }
   };
+
+  return (
+    <div className='questionnaire-container'>
+      <div className='progressbar-container flex-item justify-self-start'>
+        <div style={{ width: progressWidth }} className='progressbar'></div>
+      </div>
+      <div className='questions-container my-auto'>
+        {questions()}
+      </div>
+    </div>
+  )
 
   return (
     <div
@@ -33,35 +71,38 @@ const Questionnaire = ({ width }) => {
         top: '-86px'
       }}
     >
-      <div style={{
-        maxWidth: '840px',
-        backgroundColor: 'white',
-        borderRadius: '4px',
-        boxShadow: 'rgba(0, 0, 0, 0.1) 0px 0px 20px 0px',
-        display: 'flex',
-        flexDirection: 'column', // This will help in aligning the progress bar,
-        justifyContent: 'start',
-        position: 'relative', // Needed for positioning the progress bar,
-        width: '90%',
-        alignItems: 'center',
-        marginBottom: '60px'
-      }}
+      <div
+        style={{
+          maxWidth: '840px',
+          backgroundColor: 'white',
+          borderRadius: '4px',
+          boxShadow: 'rgba(0, 0, 0, 0.1) 0px 0px 20px 0px',
+          display: 'flex',
+          flexDirection: 'column', // This will help in aligning the progress bar,
+          justifyContent: 'start',
+          position: 'relative', // Needed for positioning the progress bar,
+          width: '90%',
+          alignItems: 'center',
+          marginBottom: '60px'
+        }}
         className='questionnaire-container'
       >
-        <div style={{
-          position: 'absolute', // Positioning progress bar at the top
-          top: '0',
-          left: '0',
-          width: '100%', // Ensures it spans the full width of the container
-          height: '5px', // Fixed height of the progress bar
-          borderRadius: '4px',
-          backgroundColor: '#e0e0e0' // Grey background for the unfilled part of the progress bar
-        }}>
-          <div style={{
-            height: '5px',
-            width: progressWidth, // Width updated by state
-            backgroundColor: '#2AA6D0' // Color of the filled progress bar
-          }}></div>
+        <div
+          style={{
+            position: 'absolute', // Positioning progress bar at the top
+            top: '0',
+            left: '0',
+            width: '100%', // Ensures it spans the full width of the container
+            height: '5px', // Fixed height of the progress bar
+            borderRadius: '4px',
+            backgroundColor: '#e0e0e0' // Grey background for the unfilled part of the progress bar
+          }}>
+          <div
+            style={{
+              height: '5px',
+              width: progressWidth, // Width updated by state
+              backgroundColor: '#2AA6D0' // Color of the filled progress bar
+            }}></div>
         </div>
         <div className='mx-auto' style={{
           marginTop: '10px',

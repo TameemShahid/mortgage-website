@@ -148,7 +148,7 @@ const LoanOptions = () => {
       <div className='loan-wrapper'>
         <div className='section-1-container'>
           <div className='section-1-content mx-auto'>
-            <div className='text-column flex-item col-6 my-auto'>
+            <div className='text-column my-auto'>
               <h1>Loan Options</h1>
               <p>Finding a great home loan involves careful consideration of your needs, finances and history. We are here to guide you.</p>
               <div className='btn-container'>
@@ -156,7 +156,7 @@ const LoanOptions = () => {
                 <button type="button" className='btn btn-outline-light btn-alternative'>Learn More</button>
               </div>
             </div>
-            <div className='flex-item col-6 img-container'>
+            <div className='img-container'>
               <img
                 className='section-1-img'
                 src={image1}
@@ -169,7 +169,7 @@ const LoanOptions = () => {
                   borderRadius: '20px',
                   width: '-webkit-fill-available',
                   maxWidth: '630px',
-                  maxHeight: '630px'
+                  maxHeight: '630px',
                 }}
               />
             </div>
@@ -203,6 +203,7 @@ const LoanOptions = () => {
           <p>Fill out the questionnaire on this page to start a discussion about your mortgage needs today!</p>
           <div className='divider mt-4' />
           <Questionnaire />
+          <div className='divider mt-5' />
           <Footer />
         </div>
       </div>

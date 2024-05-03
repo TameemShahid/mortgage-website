@@ -66,13 +66,13 @@
 }
 
 .dropdown-arrow.down {
-  transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .dropdown-arrow.up {
-  transform: rotate(-135deg);
   -webkit-transform: rotate(-135deg);
+  transform: rotate(-135deg);
 }
 
 .option-container.about-us-extra {

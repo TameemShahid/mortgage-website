@@ -1,0 +1,78 @@
+.questionnaire-container {
+  width: 90%;
+  display: flex;
+  max-width: 840px;
+  border-radius: 4px;
+  flex-direction: column;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 20px 0px;
+}
+
+.progressbar-container {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  border-radius: 4px;
+  background-color: #e0e0e0;
+}
+
+.progressbar {
+  height: 5px;
+  border-radius: 4px;
+  background-color: #2aa6d0;
+}
+
+.questions-container {
+  text-align: start;
+  align-self: center;
+  padding: 40px 25px;
+  justify-self: center;
+}
+
+.questions-container h1 {
+  font-size: 32px;
+  max-width: 450px;
+  font-weight: 400;
+  color: rgb(42, 166, 208);
+}
+
+@media screen and (max-width: 430px) {
+  .questions-container h1 {
+    font-size: 24px;
+  }
+}
+
+.question-1-options {
+  grid-template-columns: 1fr 1fr;
+}
+
+.question-1-image {
+  width: 240px;
+  height: 200px;
+  display: inline-block;
+  background-size: contain;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+@media only screen and (max-width: 1200px) and (min-width: 768px) {
+  .question-1-image {
+    height: 128px !important;
+    width: 100% !important;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .question-1-options {
+    grid-template-columns: 1fr;
+  }
+}
+
+.question-1-button {
+  width: 100%;
+  color: white;
+  padding: 15px 0px;
+  border-radius: 2px;
+  background-color: rgb(49, 167, 207);
+}

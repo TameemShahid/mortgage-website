@@ -14,14 +14,25 @@
 
 .loan-wrapper .section-1-content {
   width: 90%;
-  display: flex;
+  /* display: flex;
   flex-wrap: wrap;
   align-content: center;
-  justify-content: center;
+  justify-content: center; */
+  gap: 2rem;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 1fr;
 }
 
-.loan-wrapper .section-1-content > .col-6 {
+@media screen and (max-width: 430px) {
+  .loan-wrapper .section-1-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+.loan-wrapper .section-1-content > .text-column {
   max-width: 680px;
+  justify-self: flex-end;
 }
 
 .loan-wrapper .text-column > h1 {
@@ -36,9 +47,16 @@
 }
 
 .loan-wrapper .btn-container {
-  display: flex;
-  column-gap: 15px;
+  gap: 15px;
+  display: grid;
   align-items: center;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media screen and (max-width: 430px) {
+  .loan-wrapper .btn-container {
+    grid-template-columns: 1fr;
+  }
 }
 
 .loan-wrapper .text-column button {
@@ -61,6 +79,7 @@
 .loan-wrapper .section-1-img {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
     rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  width: 100% !important;
 }
 
 .loan-wrapper .section-2-container {

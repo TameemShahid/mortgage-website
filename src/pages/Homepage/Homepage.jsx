@@ -39,7 +39,20 @@ const Homepage = () => {
         <Tagline />
         <Intro width={width} />
         <FeaturesSection width={width} />
-        <Questionnaire width={width} />
+        <div style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#f9f9f9',
+          padding: '100px 0 50px',
+          position: 'relative',
+          top: '-86px'
+        }}>
+          <Questionnaire width={width} />
+          <div style={{ width: '100%' }} className='divider mt-5' />
+          <p className='px-4 text-center'>(Get a Personalized Quote and Expert Advice Today.)</p>
+        </div>
         <FeaturesSection2 width={width} />
         <div style={{
           top: '-86px',
