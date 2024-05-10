@@ -13,6 +13,7 @@ import {
 } from 'react-router-dom';
 import Learn from './pages/Learn/Learn.jsx';
 import LoanOptions from './pages/LoanOptions/LoanOptions.jsx';
+import ThankYou from './pages/ThankYou/ThankYou.jsx';
 
 const App = () => {
    const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -50,6 +51,7 @@ const App = () => {
                <Route path='/' element={<Homepage />} />
                <Route path='/learning-center' element={<Learn />} />
                <Route path='/loan-options' element={<LoanOptions />} />
+               <Route path='/thank-you-for-mortgage-quote' element={<ThankYou />} />
             </Routes>
             <MobileMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
          </div>

@@ -1,0 +1,84 @@
+#thank-you-container {
+  top: 86px;
+  width: 100vw;
+  position: relative;
+}
+
+.thank-you-wrapper .section-1-container {
+  width: 100vw;
+  height: 480px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  background-color: rgb(249, 249, 249);
+}
+
+.thank-you-wrapper .section-1-content {
+  width: 90%;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: 1fr;
+}
+
+.thank-you-wrapper .section-1-content > h6 {
+  font-weight: 600;
+  font-size: 16.2px;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.thank-you-wrapper .section-1-content > h1 {
+  font-size: 40px;
+  font-weight: 700;
+  max-width: 700px;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+@media screen and (max-width: 430px) {
+  .thank-you-wrapper .section-1-content > h1 {
+    font-size: 35px;
+  }
+}
+
+.thank-you-wrapper .section-2-container {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  background-color: white;
+}
+
+.thank-you-wrapper .section-2-content {
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: 100%;
+  padding-top: 80px;
+  max-width: 900px;
+  align-content: center;
+}
+
+.thank-you-wrapper .section-2-content > p {
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.thank-you-wrapper .section-2-content p > strong {
+  font-weight: 700;
+}
+
+.thank-you-wrapper .section-2-content > ol {
+  font-size: 18px !important;
+}
+
+.loan-wrapper .section-3-container {
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  align-content: center;
+  justify-content: center;
+  background-color: rgb(249, 249, 249);
+}
