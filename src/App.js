@@ -14,6 +14,7 @@ import {
 import Learn from './pages/Learn/Learn.jsx';
 import LoanOptions from './pages/LoanOptions/LoanOptions.jsx';
 import ThankYou from './pages/ThankYou/ThankYou.jsx';
+import PreQualify from './pages/Pre-Qualify/Pre-Qualify.jsx';
 
 const App = () => {
    const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -50,6 +51,7 @@ const App = () => {
             <Routes>
                <Route path='/' element={<Homepage />} />
                <Route path='/learning-center' element={<Learn />} />
+               <Route path='/pre-qualify' element={<PreQualify />} />
                <Route path='/loan-options' element={<LoanOptions />} />
                <Route path='/thank-you-for-mortgage-quote' element={<ThankYou />} />
             </Routes>
