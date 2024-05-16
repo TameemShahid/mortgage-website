@@ -17,6 +17,7 @@ import ThankYou from './pages/ThankYou/ThankYou.jsx';
 import PreQualify from './pages/Pre-Qualify/Pre-Qualify.jsx';
 import AboutUs from './pages/AboutUs/AboutUs.jsx';
 import MeetOurTeam from './pages/MeetOurTeam/MeetOurTeam.jsx';
+import Reviews from './pages/Reviews/Reviews.jsx';
 
 const App = () => {
    const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -52,11 +53,12 @@ const App = () => {
             <Navbar isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
             <Routes>
                <Route path='/' element={<Homepage />} />
+               <Route path='/reviews' element={<Reviews />} />
                <Route path='/about-us' element={<AboutUs />} />
                <Route path='/learning-center' element={<Learn />} />
-               <Route path='/meet-our-team' element={<MeetOurTeam />} />
                <Route path='/pre-qualify' element={<PreQualify />} />
                <Route path='/loan-options' element={<LoanOptions />} />
+               <Route path='/meet-our-team' element={<MeetOurTeam />} />
                <Route path='/thank-you-for-mortgage-quote' element={<ThankYou />} />
             </Routes>
             <MobileMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
