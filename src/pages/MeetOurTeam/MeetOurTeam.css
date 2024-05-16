@@ -1,0 +1,166 @@
+#meet-team-container {
+  top: 86px;
+  width: 100vw;
+  position: relative;
+}
+
+.meetteam-wrapper .section-1-container {
+  width: 100vw;
+  height: 480px;
+  display: flex;
+  align-content: center;
+  background-color: rgb(249, 249, 249);
+}
+
+.meetteam-wrapper .section-1-content {
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+}
+
+.meetteam-wrapper .section-1-content .small-text {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.meetteam-wrapper .section-1-content .large-text {
+  width: 100%;
+  font-size: 40px;
+  font-weight: 800;
+  max-width: 700px;
+  line-height: 52px;
+  text-align: center;
+  color: rgb(40, 40, 40);
+}
+
+.meetteam-wrapper .spacer {
+  width: calc(100vw * 0.9);
+}
+
+.meetteam-wrapper .section-1-content .paragraph {
+  width: 100%;
+  font-size: 18px;
+  max-width: 500px;
+  font-weight: 300;
+  text-align: center;
+}
+
+.meetteam-wrapper .section-2-container {
+  width: 100vw;
+  display: flex;
+  align-content: center;
+  background-color: white;
+}
+
+.meetteam-wrapper .section-2-content {
+  width: 84%;
+  display: grid;
+  padding-top: 80px;
+  margin-bottom: 40px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.meetteam-wrapper .section-2-content > .card-container {
+  width: 310px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.meetteam-wrapper .section-2-content .card-container > .text-column {
+  width: 100%;
+  padding: 25px;
+  text-align: center;
+}
+
+.meetteam-wrapper .section-2-content .card-container .text-column > h2 {
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.meetteam-wrapper .section-2-content .card-container .text-column > .divider {
+  width: 30px;
+  height: 2px;
+  margin: 15px;
+  border-bottom: 2px solid #2aa6d0;
+}
+
+.meetteam-wrapper
+  .section-2-content
+  .card-container
+  .text-column
+  > .small-text {
+  font-size: 15px;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: rgb(117, 117, 117);
+}
+
+.meetteam-wrapper .paragraph-container {
+  font-size: 18px;
+  font-weight: 300;
+  max-width: 900px;
+}
+
+.meetteam-wrapper .section-3-container {
+  width: 100vw;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  background-color: #474747;
+}
+
+.meetteam-wrapper .section-3-content {
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  align-content: center;
+  justify-content: center;
+  padding-left: calc(
+    calc(calc(100vw - 0px) / 2) - 50% - var(0px / 2) - (var(30px, 0px) / 2) -
+      (0px / 2)
+  );
+}
+
+.meetteam-wrapper .section-3-content > p {
+  margin: 0;
+  color: white;
+  font-weight: 500;
+  flex-basis: 100%;
+  font-size: 16.2px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.meetteam-wrapper .section-3-content > h2 {
+  color: white;
+  font-size: 50px;
+  flex-basis: 100%;
+  font-weight: 700;
+  text-align: center;
+}
+
+@media only screen and (max-width: 767px) {
+  .meetteam-wrapper .section-3-content > h2 {
+    font-size: 35px;
+  }
+}
+
+.meetteam-wrapper .section-3-content > button {
+  color: white;
+  padding: 14px 24px;
+  border-radius: 9999px;
+  border: 2px solid white;
+  text-transform: uppercase;
+  background-color: rgba(0, 0, 0, 0);
+}

@@ -1,9 +1,10 @@
 import './Learn.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import data from '../../data/learning_center/data';
 import Footer from '../../components/Footer/Footer';
 
 const Learn = () => {
+  const navigate = useNavigate();
 
   const cards = data.map((element, index) => (
     <>
@@ -57,7 +58,7 @@ const Learn = () => {
             <div style={{ flexBasis: '100%' }}></div>
             <h2>Request a Free <br />Consultation</h2>
             <div style={{ flexBasis: '100%', height: '25px' }}></div>
-            <button type="button" className='btn btn-info'>Get Started {">"}</button>
+            <button type="button" className='btn btn-info' onClick={() => navigate('/quote')}>Get Started {">"}</button>
           </div>
         </div>
         <Footer />
