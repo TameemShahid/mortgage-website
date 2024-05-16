@@ -1,0 +1,129 @@
+#about-us-container {
+  top: 86px;
+  width: 100vw;
+  position: relative;
+}
+
+.aboutus-wrapper .section-1-container {
+  width: 100vw;
+  height: 480px;
+  display: flex;
+  align-content: center;
+  background-color: rgb(249, 249, 249);
+}
+
+.aboutus-wrapper .section-1-content {
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+}
+
+.aboutus-wrapper .section-1-content .small-text {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.aboutus-wrapper .section-1-content .large-text {
+  width: 100%;
+  font-size: 40px;
+  font-weight: 800;
+  max-width: 700px;
+  line-height: 52px;
+  text-align: center;
+  color: rgb(40, 40, 40);
+}
+
+.aboutus-wrapper .spacer {
+  width: calc(100vw * 0.9);
+}
+
+.aboutus-wrapper .section-1-content .paragraph {
+  width: 100%;
+  font-size: 18px;
+  max-width: 500px;
+  font-weight: 300;
+  text-align: center;
+}
+
+.aboutus-wrapper .section-2-container {
+  width: 100vw;
+  display: flex;
+  align-content: center;
+  background-color: white;
+}
+
+.aboutus-wrapper .section-2-content {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 80px;
+  align-content: center;
+  justify-content: center;
+}
+
+.aboutus-wrapper .paragraph-container {
+  font-size: 18px;
+  font-weight: 300;
+  max-width: 900px;
+}
+
+.aboutus-wrapper .section-3-container {
+  width: 100vw;
+  display: flex;
+  align-content: center;
+  background-color: white;
+}
+
+.aboutus-wrapper .section-3-container {
+  width: 100vw;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  background-color: rgb(173, 173, 173);
+}
+
+.aboutus-wrapper .section-3-content {
+  width: 90%;
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 15px 0;
+  align-content: center;
+  justify-content: center;
+  padding-left: calc(
+    calc(calc(100vw - 0px) / 2) - 50% - var(0px / 2) - (var(30px, 0px) / 2) -
+      (0px / 2)
+  );
+  gap: 2rem;
+}
+
+.aboutus-wrapper .section-3-content > h2 {
+  margin: 0;
+  color: white;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 67px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 767px) {
+  .aboutus-wrapper .section-3-content > h2 {
+    font-size: 35px;
+  }
+}
+
+.aboutus-wrapper .section-3-content > button {
+  border: none;
+  color: white;
+  font-size: 22px;
+  font-weight: 700;
+  padding: 15px 20px;
+  border-radius: 5px;
+  text-transform: capitalize;
+  background-color: rgba(42, 166, 208);
+}

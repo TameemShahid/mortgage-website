@@ -1,7 +1,7 @@
 import whiteLogo from '../../assets/header_logo_white.webp';
 import blueLogo from '../../assets/header_logo.webp';
 import { useState, useEffect } from "react";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = ({ toggleMenu, isMenuOpen }) => {
@@ -10,6 +10,7 @@ const Navbar = ({ toggleMenu, isMenuOpen }) => {
   const [width, setWidth] = useState(window.innerWidth);
   const location = useLocation();
   const { hash, pathname, search } = location;
+  const navigate = useNavigate();
 
   const handleResize = () => {
     setWidth(window.innerWidth);
@@ -67,7 +68,7 @@ const Navbar = ({ toggleMenu, isMenuOpen }) => {
           <div style={{ display: width >= 1350 ? 'flex' : 'none', justifyContent: 'flex-end' }} className={`list-menu ${pathname === '/' ? scrolled ? 'scrolled' : '' : 'scrolled'}`}>
             <ul style={{ listStyle: 'none', margin: '0' }}>
               <li className='list-item'><Link to="/learning-center">Learn</Link></li>
-              <li><a href="#">Pre-Qualify</a></li>
+              <li className='list-item'><Link to="/pre-qualify">Pre-Qualify</Link></li>
               <li><a href="#">Calculator</a></li>
               <li className='list-item'><Link to="/loan-options">Loan Options</Link></li>
               <li
@@ -75,11 +76,11 @@ const Navbar = ({ toggleMenu, isMenuOpen }) => {
                 onMouseEnter={() => setShowSubMenu(true)}
                 onMouseLeave={() => setShowSubMenu(false)}
               >
-                <a href="#" style={{ display: 'flex', alignItems: 'center', width: '100%' }}
-                >About Us</a>
+                <Link to="/about-us" style={{ display: 'flex', alignItems: 'center', width: '100%' }}
+                >About Us</Link>
                 <ul className='sub-menu' style={{ display: showSubMenu ? 'block' : 'none' }}>
-                  <li>Meet Our Team</li>
-                  <li>Reviews</li>
+                  <li onClick={() => navigate('/meet-our-team')}>Meet Our Team</li>
+                  <li onClick={() => navigate('/reviews')}>Reviews</li>
                 </ul>
               </li>
               <li><a href="#">Blog</a></li>

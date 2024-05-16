@@ -19,9 +19,9 @@ const MobileMenu = ({ isMenuOpen, toggleMenu }) => {
       <Link className='option-container' to='/learning-center'>
         Learn
       </Link>
-      <div className='option-container'>
+      <Link className='option-container' to='/pre-qualify'>
         Pre-Qualify
-      </div>
+      </Link>
       <div className='option-container'>
         Calculator
       </div>
@@ -29,22 +29,22 @@ const MobileMenu = ({ isMenuOpen, toggleMenu }) => {
         Loan Options
       </Link>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #e0e0e0' }}>
-        <div className='option-container' style={{ borderBottom: 0 }}>
+        <Link className='option-container' to='/about-us' style={{ borderBottom: 0 }}>
           About Us
-        </div>
+        </Link>
         <div style={{ height: '30px', width: '30px', position: 'absolute', right: '10px' }} onClick={toggleAboutUs}>
           <span className={`dropdown-arrow ${isAboutUsOpen ? 'up' : 'down'}`}></span>
         </div>
       </div>
       <div className={`option-container about-us-extra ${isAboutUsOpen ? 'show' : 'hide'}`}>
-        <div>
+        <Link to='/meet-our-team' style={{ textDecoration: 'none', color: 'black' }}>
           Meet Our Team
-        </div>
+        </Link>
       </div>
       <div className={`option-container about-us-extra ${isAboutUsOpen ? 'show' : 'hide'}`}>
-        <div>
+        <Link to='/reviews' style={{ textDecoration: 'none', color: 'black' }}>
           Reviews
-        </div>
+        </Link>
       </div>
       <div className='option-container'>
         Blog
