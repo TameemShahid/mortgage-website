@@ -46,9 +46,9 @@ const MobileMenu = ({ isMenuOpen, toggleMenu }) => {
           Reviews
         </Link>
       </div>
-      <div className='option-container'>
+      <Link className='option-container' to='/blogs'>
         Blog
-      </div>
+      </Link>
       <Link className='option-container' to='/contact-us'>
         Contact Us
       </Link>
