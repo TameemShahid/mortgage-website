@@ -20,6 +20,7 @@ import MeetOurTeam from './pages/MeetOurTeam/MeetOurTeam.jsx';
 import Reviews from './pages/Reviews/Reviews.jsx';
 import ContactUs from './pages/ContactUs/ContactUs.jsx';
 import Blog from './pages/Blog/Blog.jsx';
+import Quote from './pages/Quote/Quote.jsx';
 
 const App = () => {
    const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -56,6 +57,7 @@ const App = () => {
             <Routes>
                <Route path='/' element={<Homepage />} />
                <Route path='/blogs' element={<Blog />} />
+               <Route path='/quote' element={<Quote />} />
                <Route path='/reviews' element={<Reviews />} />
                <Route path='/about-us' element={<AboutUs />} />
                <Route path='/contact-us' element={<ContactUs />} />

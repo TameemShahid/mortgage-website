@@ -1,0 +1,62 @@
+#quote-container {
+  top: 86px;
+  width: 100vw;
+  position: relative;
+}
+
+.quote-wrapper .section-1-container {
+  width: 100vw;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.quote-wrapper .section-1-content {
+  gap: 15px;
+  width: 90%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.quote-wrapper .section-1-content > .column-1 {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+}
+
+.quote-wrapper .section-1-content .column-1 > h1 {
+  margin: 0;
+  font-size: 36px;
+  font-weight: 800;
+}
+
+.quote-wrapper .section-1-content .column-1 > p {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.quote-wrapper .section-1-content .column-1 > .p-alternate {
+  margin: 0;
+  width: 199%;
+  font-size: 24px;
+  font-weight: 300;
+  margin-bottom: 15px;
+}
+
+.quote-wrapper .section-1-content .column-1 p > i {
+  min-width: 24px;
+  min-height: 24px;
+  color: #2aa6d0;
+  margin-right: 10px;
+}
+
+.quote-wrapper .section-1-content > .column-2 {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+}
