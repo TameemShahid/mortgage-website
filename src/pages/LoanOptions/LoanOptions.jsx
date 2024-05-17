@@ -2,6 +2,7 @@ import './LoanOptions.css';
 import image1 from '../../assets/loan_options/Down-Payment.jpg';
 import Questionnaire from '../../components/Questionnaire/Questionnaire';
 import Footer from '../../components/Footer/Footer';
+import { useRef } from 'react';
 
 const purchaseData = [
   {
@@ -110,6 +111,12 @@ const refinanceData = [
 ]
 
 const LoanOptions = () => {
+  const quoteSectionRef = useRef(null);
+  const infoSectionRef = useRef(null);
+
+  const scrollToSection = (ref) => {
+    ref.current.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const generateCards = () => {
     return purchaseData.map(element => (
@@ -152,8 +159,8 @@ const LoanOptions = () => {
               <h1>Loan Options</h1>
               <p>Finding a great home loan involves careful consideration of your needs, finances and history. We are here to guide you.</p>
               <div className='btn-container'>
-                <button type="button" className='btn btn-info'>Get Your Quote</button>
-                <button type="button" className='btn btn-outline-light btn-alternative'>Learn More</button>
+                <button type="button" className='btn btn-info' onClick={() => scrollToSection(quoteSectionRef)}>Get Your Quote</button>
+                <button type="button" className='btn btn-outline-light btn-alternative' onClick={() => scrollToSection(infoSectionRef)}>Learn More</button>
               </div>
             </div>
             <div className='img-container'>
@@ -175,7 +182,7 @@ const LoanOptions = () => {
             </div>
           </div>
         </div>
-        <div className='section-2-container'>
+        <div ref={infoSectionRef} className='section-2-container'>
           <div className='section-2-content'>
             <div className='heading-container'>
               <h1 className='mx-auto'>Purchase</h1>
@@ -194,7 +201,7 @@ const LoanOptions = () => {
             <div className='cards-container'>
               {generateRefinanceCards()}
             </div>
-            <div className='spacer' />
+            <div ref={quoteSectionRef} className='spacer' />
           </div>
         </div>
         <div className='section-3-container'>

@@ -17,7 +17,7 @@ const Learn = () => {
         <div className="card-body">
           <h5 className="card-title">{element.title}</h5>
           <div style={{ marginBottom: '15px' }}>
-            <Link to="/learning-center">Learn</Link>
+            <Link style={{ textDecoration: 'none', color: 'rgb(42, 166, 208)' }} to="/learning-center">Learn</Link>
           </div>
           <p className="card-text">{element.body}</p>
         </div>

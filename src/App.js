@@ -18,6 +18,7 @@ import PreQualify from './pages/Pre-Qualify/Pre-Qualify.jsx';
 import AboutUs from './pages/AboutUs/AboutUs.jsx';
 import MeetOurTeam from './pages/MeetOurTeam/MeetOurTeam.jsx';
 import Reviews from './pages/Reviews/Reviews.jsx';
+import ContactUs from './pages/ContactUs/ContactUs.jsx';
 
 const App = () => {
    const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -55,6 +56,7 @@ const App = () => {
                <Route path='/' element={<Homepage />} />
                <Route path='/reviews' element={<Reviews />} />
                <Route path='/about-us' element={<AboutUs />} />
+               <Route path='/contact-us' element={<ContactUs />} />
                <Route path='/learning-center' element={<Learn />} />
                <Route path='/pre-qualify' element={<PreQualify />} />
                <Route path='/loan-options' element={<LoanOptions />} />

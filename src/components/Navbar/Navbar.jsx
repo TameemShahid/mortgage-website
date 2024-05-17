@@ -84,7 +84,7 @@ const Navbar = ({ toggleMenu, isMenuOpen }) => {
                 </ul>
               </li>
               <li><a href="#">Blog</a></li>
-              <li><a href="#">Contact Us</a></li>
+              <li><Link to="/contact-us">Contact Us</Link></li>
               <li><button type="button" className='btn btn-info'>Apply Online</button></li>
               <li><button type="button" className='btn btn-info'>Get A Quote</button></li>
             </ul>

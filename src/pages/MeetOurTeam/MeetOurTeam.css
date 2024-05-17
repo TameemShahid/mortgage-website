@@ -64,7 +64,9 @@
   display: grid;
   padding-top: 80px;
   margin-bottom: 40px;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .meetteam-wrapper .section-2-content > .card-container {
