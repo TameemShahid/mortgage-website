@@ -22,9 +22,9 @@ const MobileMenu = ({ isMenuOpen, toggleMenu }) => {
       <Link className='option-container' to='/pre-qualify'>
         Pre-Qualify
       </Link>
-      <div className='option-container'>
+      <Link className='option-container' to='/calculator'>
         Calculator
-      </div>
+      </Link>
       <Link className='option-container' to='/loan-options'>
         Loan Options
       </Link>

@@ -69,7 +69,7 @@ const Navbar = ({ toggleMenu, isMenuOpen }) => {
             <ul style={{ listStyle: 'none', margin: '0' }}>
               <li className='list-item'><Link to="/learning-center">Learn</Link></li>
               <li className='list-item'><Link to="/pre-qualify">Pre-Qualify</Link></li>
-              <li><a href="#">Calculator</a></li>
+              <li className='list-item'><Link to="/calculator">Calculator</Link></li>
               <li className='list-item'><Link to="/loan-options">Loan Options</Link></li>
               <li
                 style={{ height: '50px' }}

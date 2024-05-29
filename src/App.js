@@ -21,6 +21,7 @@ import Reviews from './pages/Reviews/Reviews.jsx';
 import ContactUs from './pages/ContactUs/ContactUs.jsx';
 import Blog from './pages/Blog/Blog.jsx';
 import Quote from './pages/Quote/Quote.jsx';
+import Calculator from './pages/Calculator/Calculator.jsx';
 
 const App = () => {
    const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -62,6 +63,7 @@ const App = () => {
                <Route path='/about-us' element={<AboutUs />} />
                <Route path='/contact-us' element={<ContactUs />} />
                <Route path='/learning-center' element={<Learn />} />
+               <Route path='/calculator' element={<Calculator />} />
                <Route path='/pre-qualify' element={<PreQualify />} />
                <Route path='/loan-options' element={<LoanOptions />} />
                <Route path='/meet-our-team' element={<MeetOurTeam />} />
