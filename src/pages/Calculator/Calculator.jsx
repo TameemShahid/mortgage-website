@@ -1,12 +1,6 @@
 import DonutChart from '../../components/DonutChart/DonutChart';
 import './Calculator.css';
-import { useEffect, useState } from 'react';
-
-// monthly payment formula
-// let monthlyPayment = mortgageAmount * (monthlyInterest * Math.pow(1 + monthlyInterest, loanTermsInMonths)) / (Math.pow(1 + monthlyInterest, loanTermsInMonths) - 1);
-
-// reduced loan term formula
-// const reducedTerm = Math.log10(newMonthlyPayment / (newMonthlyPayment - (calculatorData.mortgageAmount * monthlyInterestRate))) / Math.log10(1 + monthlyInterestRate);
+import { useEffect, useLayoutEffect, useState } from 'react';
 
 const Calculator = () => {
   const [submitButton, setSubmitButton] = useState(true);
@@ -21,6 +15,16 @@ const Calculator = () => {
     increaseFrequencyOptions: 'Monthly',
     increaseLumpSumOptions: 'One time'
   });
+  const handleOptionChange = (property, value) => {
+    const temp = {...options};
+    temp[property] = value;
+
+    if (property === 'increaseFrequencyOptions') {
+      calculateSavings();
+    }
+    console.log({ property, value}, temp);
+    setOptions(temp);
+  };
 
   const [calculatorData, setCalculatorData] = useState({
     homeValue: 200000,
@@ -50,6 +54,9 @@ const Calculator = () => {
     extraPaymentPerMonth: 0
   });
   const [extraPaymentInput, setExtraPaymentInput] = useState('');
+  const [additionalSaving, setAdditionalSaving] = useState(0);
+  const [newPaymentAmount, setNewPaymentAmount] = useState(0);
+  const [reducedLoanTerm, setReducedLoanTerm] = useState(0);
 
   /*
   * calculate monthly interest data
@@ -94,7 +101,6 @@ const Calculator = () => {
     const totalPayment = totalMonthlyPayment * loanTermsInMonths();
     const totalInterest = monthlyPayment * loanTermsInMonths() - calculatorData.mortgageAmount;
     setRawData({
-      ...rawData,
       monthlyPMI: pmiMonthly,
       totalPayment: totalPayment,
       totalInterest: totalInterest,
@@ -174,26 +180,39 @@ const Calculator = () => {
     return `${wholeYears} years and ${remainingMonths} months`;
   }
 
-  // const calculateReducedLoanTerm = (extraPayment) => {
-  //   const newMonthlyPayment = mortgageData.monthlyPayment + extraPayment;
-  //   const monthlyInterestRate = calculatorData.interestRate / 100 / 12;
-  //   const reducedTerm = Math.log10(newMonthlyPayment / (newMonthlyPayment - (calculatorData.mortgageAmount * monthlyInterestRate))) / Math.log10(1 + monthlyInterestRate);
-  //   return Math.round(reducedTerm);
-  // }
+  const calculateReducedLoanTerm = (newMonthlyPayment) => {
+    const monthlyInterestRate = calculateMonthlyInterest(calculatorData.interestRate);
+    const reducedTerm = Math.log10(newMonthlyPayment / (newMonthlyPayment - (calculatorData.mortgageAmount * monthlyInterestRate))) / Math.log10(1 + monthlyInterestRate);
+    return Math.round(reducedTerm);
+  }
   const calculateSavings = () => {
-    let value = document.getElementById('monthlyAdditional').value && parseInt(document.getElementById('monthlyAdditional').value);
+    let value = extraPaymentInput ? parseFloat(extraPaymentInput) : 0;
     value = options.increaseFrequencyOptions === 'Bi weekly' ? value * 2 : options.increaseFrequencyOptions === 'Weekly' ? value * 4 : value;
-    const newMonthlyPayment = options.increaseFrequencyOptions === 'Monthly' ? mortgageData.monthlyPayment + value : options.increaseFrequencyOptions === 'Bi weekly' ? mortgageData.monthlyPayment + (value * 2) : mortgageData.monthlyPayment + (value * 4);
-    const reducedTerm = calculateReducedLoanTerm(mortgageData.monthlyPayment + value);
+    const temp = {...rawData};
+    temp['extraPaymentPerMonth'] = value;
+    setRawData(temp);
+    const newMonthlyPayment = rawData.monthlyPayment + value;
+    const reducedTerm = calculateReducedLoanTerm(newMonthlyPayment);
     const newTotalPayment = newMonthlyPayment * reducedTerm;
     const newTotalInterest = newTotalPayment - calculatorData.mortgageAmount;
-    setTotalSaving(mortgageData.totalInterest - newTotalInterest);
-    return mortgageData.totalInterest - newTotalInterest;
+    setAdditionalSaving(rawData.totalInterest - newTotalInterest);
+    setNewPaymentAmount(newMonthlyPayment);
+    setReducedLoanTerm(loanTermsInMonths(calculatorData.loanTerms) - reducedTerm);
+    return rawData.totalInterest - newTotalInterest;
   }
 
   const handleInputChange = (e) => {
-    const value = parseFloat(e.target.value);
-    setCalculatorData({ ...calculatorData, [e.target.id]: isNaN(value) ? 0 : value });
+    let value = 0;
+    if (e.target.id === 'firstPaymentDate') {
+      value = e.target.value;
+    } 
+    else {
+      value = e.target.value ? parseFloat(e.target.value) : 0;
+    }
+
+    const temp = {...calculatorData};
+    temp[e.target.id] = value;
+    setCalculatorData(temp);
   }
 
   return (
@@ -203,13 +222,13 @@ const Calculator = () => {
           <div className='section-1-content mx-auto'>
             <h2>Calculator</h2>
             <div className='calc-option-container'>
-              <div className={`calc-option ${options.activeOption === 'Purchase' ? 'active' : ''}`} onClick={() => setOptions({ activeOption: 'Purchase' })}>Purhcase</div>
-              <div className={`calc-option ${options.activeOption === 'Refinance' ? 'active' : ''}`} onClick={() => setOptions({ activeOption: 'Refinance' })}>Refinance</div>
-              <div className={`calc-option ${options.activeOption === 'Rent vs Buy' ? 'active' : ''}`} onClick={() => setOptions({ activeOption: 'Rent vs Buy' })}>Rent vs Buy</div>
-              <div className={`calc-option ${options.activeOption === 'VA Purchase' ? 'active' : ''}`} onClick={() => setOptions({ activeOption: 'VA Purchase' })}>VA Purchase</div>
-              <div className={`calc-option ${options.activeOption === 'VA Refinance' ? 'active' : ''}`} onClick={() => setOptions({ activeOption: 'VA Refinance' })}>VA Refinance</div>
-              <div className={`calc-option ${options.activeOption === 'Debt-Service (DSCR)' ? 'active' : ''}`} onClick={() => setOptions({ activeOption: 'Debt-Service (DSCR)' })}>Debt-Service (DSCR)</div>
-              <div className={`calc-option ${options.activeOption === 'Fix & Flip' ? 'active' : ''}`} onClick={() => setOptions({ activeOption: 'Fix & Flip' })}>Fix & Flip</div>
+              <div className={`calc-option ${options.activeOption === 'Purchase' ? 'active' : ''}`} onClick={() => handleOptionChange('activeOption', 'Purchase')}>Purhcase</div>
+              <div className={`calc-option ${options.activeOption === 'Refinance' ? 'active' : ''}`} onClick={() => handleOptionChange('activeOption', 'Refinance')}>Refinance</div>
+              <div className={`calc-option ${options.activeOption === 'Rent vs Buy' ? 'active' : ''}`} onClick={() => handleOptionChange('activeOption', 'Rent vs Buy')}>Rent vs Buy</div>
+              <div className={`calc-option ${options.activeOption === 'VA Purchase' ? 'active' : ''}`} onClick={() => handleOptionChange('activeOption', 'VA Purchase')}>VA Purchase</div>
+              <div className={`calc-option ${options.activeOption === 'VA Refinance' ? 'active' : ''}`} onClick={() => handleOptionChange('activeOption', 'VA Refinance')}>VA Refinance</div>
+              <div className={`calc-option ${options.activeOption === 'Debt-Service (DSCR)' ? 'active' : ''}`} onClick={() => handleOptionChange('activeOption', 'Debt-Service (DSCR)')}>Debt-Service (DSCR)</div>
+              <div className={`calc-option ${options.activeOption === 'Fix & Flip' ? 'active' : ''}`} onClick={() => handleOptionChange('activeOption', 'Fix & Flip')}>Fix & Flip</div>
             </div>
           </div>
         </div>
@@ -222,7 +241,7 @@ const Calculator = () => {
                   <label htmlFor="homeValue">Home Value</label>
                   <input type='text' id='homeValue' placeholder='$200,000' value={calculatorData.homeValue} onChange={handleInputChange} />
                   <label htmlFor="downPayment">Down Payment</label>
-                  <input type='text' id='downPayment' placeholder='$0' value={calculatorData.downPayment} onChange={(e) => setCalculatorData({ ...calculatorData, downPayment: parseFloat(e.target.value) })} />
+                  <input type='text' id='downPayment' placeholder='$0' value={calculatorData.downPayment} onChange={handleInputChange} />
                   <span className=' down-payment-btn-group'>
                     <div className='down-payment-btn-container'>
                       <span className={`btn ${options.downPaymentOption === '$' ? 'active' : ''}`} onClick={() => setOptions({ ...options, downPaymentOption: '$' })}>$</span>
@@ -230,9 +249,9 @@ const Calculator = () => {
                     </div>
                   </span>
                   <label htmlFor="mortgageAmount">Mortgage Amount</label>
-                  <input type='text' id='mortgageAmount' placeholder='$200,000.00' value={calculatorData.mortgageAmount} onChange={(e) => setCalculatorData({ ...calculatorData, mortgageAmount: parseFloat(e.target.value) })} />
+                  <input type='text' id='mortgageAmount' placeholder='$200,000.00' value={calculatorData.mortgageAmount} onChange={handleInputChange} />
                   <label htmlFor="loanTerms">Loan Terms</label>
-                  <input type='text' id='loanTerms' placeholder='$24' value={calculatorData.loanTerms} onChange={(e) => setCalculatorData({ ...calculatorData, loanTerms: parseInt(e.target.value) })} />
+                  <input type='text' id='loanTerms' placeholder='$24' value={calculatorData.loanTerms} onChange={handleInputChange} />
                   <span className=' down-payment-btn-group'>
                     <div className='down-payment-btn-container'>
                       <span className={`btn ${options.loanTermsOptions === 'Year' ? 'active' : ''}`} onClick={() => setOptions({ ...options, loanTermsOptions: 'Year' })}>Year</span>
@@ -240,9 +259,9 @@ const Calculator = () => {
                     </div>
                   </span>
                   <label htmlFor="interestRate">Interest Rate</label>
-                  <input type='text' id='interestRate' placeholder='5' value={calculatorData.interestRate} onChange={e => setCalculatorData({ ...calculatorData, interestRate: parseFloat(e.target.value) })} />
+                  <input type='text' id='interestRate' placeholder='5' value={calculatorData.interestRate} onChange={handleInputChange} />
                   <label htmlFor="pmi">PMI (Yearly)</label>
-                  <input type='text' id='PMI' placeholder='$0' value={calculatorData.pmiYearly} onChange={e => setCalculatorData({ ...calculatorData, pmiYearly: parseFloat(e.target.value) })} />
+                  <input type='text' id='pmiYearly' placeholder='$0' value={calculatorData.pmiYearly} onChange={handleInputChange} />
                   <span className=' down-payment-btn-group'>
                     <div className='down-payment-btn-container'>
                       <span className={`btn ${options.pmiOptions === '$' ? 'active' : ''}`} onClick={() => setOptions({ ...options, pmiOptions: '$' })}>$</span>
@@ -250,7 +269,7 @@ const Calculator = () => {
                     </div>
                   </span>
                   <label htmlFor="propertyTax">Property Tax (Yearly)</label>
-                  <input type='text' id='propertyTax' placeholder='0.6' value={calculatorData.propertyTaxYearly} onChange={e => setCalculatorData({ ...calculatorData, propertyTaxYearly: parseFloat(e.target.value) })} />
+                  <input type='text' id='propertyTaxYearly' placeholder='0.6' value={calculatorData.propertyTaxYearly} onChange={handleInputChange} />
                   <span className=' down-payment-btn-group'>
                     <div className='down-payment-btn-container'>
                       <span className={`btn ${options.propertyTaxOptions === '$' ? 'active' : ''}`} onClick={() => setOptions({ ...options, propertyTaxOptions: '$' })}>$</span>
@@ -258,7 +277,7 @@ const Calculator = () => {
                     </div>
                   </span>
                   <label htmlFor="ownersInsurance">Homeowners Insurance (Yearly)</label>
-                  <input type='text' id='ownersInsurance' placeholder='$1,200' value={calculatorData.homeOwnersInsurance} onChange={e => setCalculatorData({ ...calculatorData, homeOwnersInsurance: parseFloat(e.target.value) })} />
+                  <input type='text' id='homeOwnersInsurance' placeholder='$1,200' value={calculatorData.homeOwnersInsurance} onChange={handleInputChange} />
                   <span className=' down-payment-btn-group'>
                     <div className='down-payment-btn-container'>
                       <span className={`btn ${options.ownersInsurance === '$' ? 'active' : ''}`} onClick={() => setOptions({ ...options, ownersInsurance: '$' })}>$</span>
@@ -266,11 +285,11 @@ const Calculator = () => {
                     </div>
                   </span>
                   <label htmlFor="hoaDues">HOA Dues Per Month</label>
-                  <input type='text' id='hoaDues' placeholder='$0' value={calculatorData.hoaDuesPerMonth} onChange={e => setCalculatorData({ ...calculatorData, hoaDuesPerMonth: parseFloat(e.target.value) })} />
+                  <input type='text' id='hoaDuesPerMonth' placeholder='$0' value={calculatorData.hoaDuesPerMonth} onChange={handleInputChange} />
                   <label htmlFor="firstPaymentDate">First Payment Date</label>
-                  <input type='date' id='firstPaymentDate' placeholder='May 19, 2024' value={calculatorData.firstPaymentDate} onChange={e => setCalculatorData({ ...calculatorData, firstPaymentDate: e.target.value })} />
+                  <input type='date' id='firstPaymentDate' placeholder='May 19, 2024' value={calculatorData.firstPaymentDate} onChange={handleInputChange} />
                   <label htmlFor="extraPaymentPerMonth">Extra Payment Per Month</label>
-                  <input type='text' id='extraPaymentPerMonth' placeholder='$0' value={calculatorData.extraPaymentPerMonth} onChange={e => setCalculatorData({ ...calculatorData, extraPaymentPerMonth: parseFloat(e.target.value) })} />
+                  <input type='text' id='extraPaymentPerMonth' placeholder='$0' value={calculatorData.extraPaymentPerMonth} onChange={handleInputChange} />
                   <button type='submit' className='btn btn-info' disabled={submitButton} onClick={handleSubmit}> Get a Quote</button>
                 </div>
               </div>
@@ -293,15 +312,15 @@ const Calculator = () => {
               <div className='payment-details alternative'>
                 <div className='details'>
                   <div className='alternative'>Savings</div>
-                  <p className='alternative'>{'$0.00'}</p>
+                  <p className='alternative'>{formatter.format(additionalSaving)}</p>
                 </div>
                 <div className='details'>
                   <div className='alternative'>Payment Amount</div>
-                  <p className='alternative'>{'$0.00'}</p>
+                  <p className='alternative'>{formatter.format(newPaymentAmount)}</p>
                 </div>
                 <div className='details'>
                   <div className='alternative'>Shorten Loan Term By</div>
-                  <p className='alternative'>{'$0.00'}</p>
+                  <p className='alternative'>{convertMonthsToYearsAndMonths(reducedLoanTerm)}</p>
                 </div>
               </div>
               <div className='payment-breakdown-container'>
@@ -351,7 +370,7 @@ const Calculator = () => {
                   <h2>Early Payoff Strategy</h2>
                   <div className='early-payoff-input'>
                     <label htmlFor="monthlyAdditional">Additional Monthly</label>
-                    <input type="text" id='monthlyAdditional' placeholder='You can add below $500.00' value={extraPaymentInput} onChange={e => setExtraPaymentInput(e.target.value)} />
+                    <input type="text" id='monthlyAdditional' placeholder='You can add below $500.00' value={extraPaymentInput} onChange={e => setExtraPaymentInput(e.target.value)} onBlur={calculateSavings} />
                   </div>
                   <div className='early-payoff-input' style={{ paddingBottom: '32px' }}>
                     <label htmlFor="increaseFrequency">Increase Frequency</label>
