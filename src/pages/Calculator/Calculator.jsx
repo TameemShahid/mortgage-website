@@ -19,9 +19,14 @@ const Calculator = () => {
     const temp = { ...options };
     temp[property] = value;
 
-    if (property === 'increaseFrequencyOptions' || property === 'increaseLumpSumOptions') {
+    if (property === 'increaseFrequencyOptions') {
       calculateSavings(value);
     }
+
+    if (property === 'increaseLumpSumOptions') {
+      calculateLumpSumSavings(value);
+    }
+
     console.log({ property, value }, temp);
     setOptions(temp);
   };
@@ -188,51 +193,77 @@ const Calculator = () => {
     const reducedTerm = Math.log10(newMonthlyPayment / (newMonthlyPayment - (mortgageAmount * monthlyInterestRate))) / Math.log10(1 + monthlyInterestRate);
     return Math.round(reducedTerm);
   }
+
+  let tracker = 0;
   const calculateSavings = (frequency, extraPayment) => {
+    let value = 0;
+
+    if (extraPayment) {
+      value = parseFloat(extraPayment);
+    }
+    else {
+      value = parseFloat(extraPaymentInput);
+    }
+
+    if (frequency === 'Bi weekly') {
+      value = value * 2;
+    }
+    else if (frequency === 'Weekly') {
+      value = value * 4;
+    }
+
+    const temp = { ...rawData };
+    temp['extraPaymentPerMonth'] = value;
+    setRawData(temp);
+
+    const newMonthlyPayment = rawData.monthlyPayment + value;
+    const reducedTerm = calculateReducedLoanTerm(newMonthlyPayment);
+    const newTotalPayment = newMonthlyPayment * reducedTerm;
+    const newTotalInterest = newTotalPayment - calculatorData.mortgageAmount;
+
+    const saving = Math.abs(rawData.totalInterest - newTotalInterest);
+    setAdditionalSaving(saving);
+
+    const payment = rawData.totalMonthlyPayment + value;
+    setNewPaymentAmount(payment);
+
+    const newTerm = Math.abs(loanTermsInMonths(calculatorData.loanTerms) - reducedTerm);
+    setReducedLoanTerm(newTerm);
+
+    return saving;
+  }
+
+  const calculateLumpSumSavings = (frequency, extraPayment) => {
     let value = 0;
     let mortgageAmount = calculatorData.mortgageAmount;
 
     if (extraPayment) {
       value = parseFloat(extraPayment);
+    } else {
+      value = parseFloat(lumpSumPaymentInput);
     }
 
-    if (extraPaymentInput && extraPaymentInput != value) {
-      if (frequency === 'Bi weekly') {
-        value = value * 2;
-      }
-      else if (frequency === 'Weekly') {
-        value = value * 4;
-      }
-    }
-    if (lumpSumPaymentInput && lumpSumPaymentInput != value) {
-      if (frequency === 'One time') {
-        mortgageAmount = mortgageAmount - value;
-        value = 0;
-      }
-      else if (frequency === 'Yearly') {
-        value = value / 12;
-      }
-      else if (frequency === 'Quarterly') {
-        value = value / 4;
-      }
+    if (frequency === 'One time') {
+      mortgageAmount = mortgageAmount - value;
+      value = 0;
+    } else if (frequency === 'Yearly') {
+      value = value / 12;
+    } else if (frequency === 'Quarterly') {
+      value = value / 4;
     }
 
     const newMonthlyPayment = rawData.monthlyPayment + value;
     const reducedTerm = calculateReducedLoanTerm(newMonthlyPayment, mortgageAmount);
     const newTotalPayment = newMonthlyPayment * reducedTerm;
     const newTotalInterest = newTotalPayment - calculatorData.mortgageAmount;
-    setAdditionalSaving(rawData.totalInterest - newTotalInterest);
-    
-    if(extraPaymentInput)  {
-      setNewPaymentAmount(rawData.totalMonthlyPayment + value);
 
-      const temp = { ...rawData };
-      temp['extraPaymentPerMonth'] = value;
-      setRawData(temp);
-    }
+    const saving = Math.abs(rawData.totalInterest - newTotalInterest);
+    setAdditionalSaving(saving);
 
-    setReducedLoanTerm(loanTermsInMonths(calculatorData.loanTerms) - reducedTerm);
-    return rawData.totalInterest - newTotalInterest;
+    const newTerm = Math.abs(loanTermsInMonths(calculatorData.loanTerms) - reducedTerm);
+    setReducedLoanTerm(newTerm);
+
+    return saving;
   }
 
   const handleInputChange = (e) => {
@@ -348,7 +379,7 @@ const Calculator = () => {
                   <div className='alternative'>Savings</div>
                   <p className='alternative'>{formatter.format(additionalSaving)}</p>
                 </div>
-                <div className='details'>
+                <div className='details' style={{ padding: '0 20px' }}>
                   <div className='alternative'>Payment Amount</div>
                   <p className='alternative'>{formatter.format(newPaymentAmount)}</p>
                 </div>
@@ -419,7 +450,7 @@ const Calculator = () => {
                   <h2>Lump Sum Payment</h2>
                   <div className='early-payoff-input'>
                     <label htmlFor="monthlyAdditional">Lump Sum Addition</label>
-                    <input type="text" id='monthlyAdditional' value={lumpSumPaymentInput} onChange={e => setLumpSumPaymentInput(e.target.value)} placeholder='You can add below $100k.00' onBlur={(e) => calculateSavings(options.increaseLumpSumOptions, e.target.value)} />
+                    <input type="text" id='monthlyAdditional' value={lumpSumPaymentInput} onChange={e => setLumpSumPaymentInput(e.target.value)} placeholder='You can add below $100k.00' onBlur={(e) => calculateLumpSumSavings(options.increaseLumpSumOptions, e.target.value)} />
                   </div>
                   <div className='early-payoff-input' style={{ paddingBottom: '32px' }}>
                     <label htmlFor="increaseFrequency">Increase Frequency</label>
