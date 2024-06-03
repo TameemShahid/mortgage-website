@@ -16,13 +16,13 @@ const Calculator = () => {
     increaseLumpSumOptions: 'One time'
   });
   const handleOptionChange = (property, value) => {
-    const temp = {...options};
+    const temp = { ...options };
     temp[property] = value;
 
     if (property === 'increaseFrequencyOptions') {
-      calculateSavings();
+      calculateSavings(value);
     }
-    console.log({ property, value}, temp);
+    console.log({ property, value }, temp);
     setOptions(temp);
   };
 
@@ -53,10 +53,11 @@ const Calculator = () => {
     monthlyHomeInsurance: 0,
     extraPaymentPerMonth: 0
   });
-  const [extraPaymentInput, setExtraPaymentInput] = useState('');
+  const [reducedLoanTerm, setReducedLoanTerm] = useState(0);
   const [additionalSaving, setAdditionalSaving] = useState(0);
   const [newPaymentAmount, setNewPaymentAmount] = useState(0);
-  const [reducedLoanTerm, setReducedLoanTerm] = useState(0);
+  const [extraPaymentInput, setExtraPaymentInput] = useState('');
+  const [lumpSumPaymentInput, setLumpSumPaymentInput] = useState('');
 
   /*
   * calculate monthly interest data
@@ -180,17 +181,38 @@ const Calculator = () => {
     return `${wholeYears} years and ${remainingMonths} months`;
   }
 
-  const calculateReducedLoanTerm = (newMonthlyPayment) => {
+  const calculateReducedLoanTerm = (newMonthlyPayment, mortgageAmount = calculatorData.mortgageAmount) => {
     const monthlyInterestRate = calculateMonthlyInterest(calculatorData.interestRate);
-    const reducedTerm = Math.log10(newMonthlyPayment / (newMonthlyPayment - (calculatorData.mortgageAmount * monthlyInterestRate))) / Math.log10(1 + monthlyInterestRate);
+    const reducedTerm = Math.log10(newMonthlyPayment / (newMonthlyPayment - (mortgageAmount * monthlyInterestRate))) / Math.log10(1 + monthlyInterestRate);
     return Math.round(reducedTerm);
   }
-  const calculateSavings = () => {
-    let value = extraPaymentInput ? parseFloat(extraPaymentInput) : 0;
-    value = options.increaseFrequencyOptions === 'Bi weekly' ? value * 2 : options.increaseFrequencyOptions === 'Weekly' ? value * 4 : value;
-    const temp = {...rawData};
+  const calculateSavings = (frequency, extraPayment) => {
+    let value = 0;
+    let mortgageAmount = calculatorData.mortgageAmount;
+
+    if (extraPayment) {
+      value = parseFloat(extraPayment);
+    } else if (extraPaymentInput) {
+      value = parseFloat(extraPaymentInput);
+    }
+
+    if (frequency == 'One time') {
+      const temp = rawData.monthlyPayment;
+    }
+    else if (frequency === 'Yearly') {
+      value = value / 12;
+    }
+    else if (frequency === 'Bi weekly') {
+      value = value * 2;
+    }
+    else if (frequency === 'Weekly') {
+      value = value * 4;
+    }
+
+    const temp = { ...rawData };
     temp['extraPaymentPerMonth'] = value;
     setRawData(temp);
+
     const newMonthlyPayment = rawData.monthlyPayment + value;
     const reducedTerm = calculateReducedLoanTerm(newMonthlyPayment);
     const newTotalPayment = newMonthlyPayment * reducedTerm;
@@ -205,12 +227,12 @@ const Calculator = () => {
     let value = 0;
     if (e.target.id === 'firstPaymentDate') {
       value = e.target.value;
-    } 
+    }
     else {
       value = e.target.value ? parseFloat(e.target.value) : 0;
     }
 
-    const temp = {...calculatorData};
+    const temp = { ...calculatorData };
     temp[e.target.id] = value;
     setCalculatorData(temp);
   }
@@ -326,9 +348,9 @@ const Calculator = () => {
               <div className='payment-breakdown-container'>
                 <h2>Payment Breakdown</h2>
                 <DonutChart data={getChartData(rawData)} />
-                {/* <div className='calc-option-container alternative'>
-                  <div className={`calc-option alternative ${options.paymentBreakdown === 'Monthly Payment' ? 'active' : ''}`} onClick={() => setOptions({ ...options, paymentBreakdown: 'Monthly Payment' })}>Monthly Payment</div>
-                  <div className={`calc-option alternative ${options.paymentBreakdown === 'Total Payment' ? 'active' : ''}`} onClick={() => setOptions({ ...options, paymentBreakdown: 'Total Payment' })}>Total Payment</div>
+                <div className='calc-option-container alternative'>
+                  <div className={`calc-option alternative ${options.paymentBreakdown === 'Monthly Payment' ? 'active' : ''}`} onClick={() => handleOptionChange('paymentBreakdown', 'Monthly Payment')}>Monthly Payment</div>
+                  <div className={`calc-option alternative ${options.paymentBreakdown === 'Total Payment' ? 'active' : ''}`} onClick={() => handleOptionChange('paymentBreakdown', 'Total Payment')}>Total Payment</div>
                 </div>
                 <div className='calculator-details'>
                   <div className='detail'>
@@ -341,29 +363,29 @@ const Calculator = () => {
                   </div>
                   <div className='detail'>
                     <div>Monthly Principal & Interest:</div>
-                    <p>{mortgageData.monthlyPayment ? formatter.format(mortgageData.monthlyPayment) : '$0.00'}</p>
+                    <p>{rawData.monthlyPayment ? formatter.format(rawData.monthlyPayment) : '$0.00'}</p>
                   </div>
                   <div className='detail'>
                     <div>Monthly Extra Payment:</div>
-                    <p>{mortgageData.extraPaymentPerMonth ? formatter.format(mortgageData.extraPaymentPerMonth) : '$0.00'}</p>
+                    <p>{rawData.extraPaymentPerMonth ? formatter.format(rawData.extraPaymentPerMonth) : '$0.00'}</p>
                   </div>
                   <div className='detail'>
                     <div>Monthly Property Tax:</div>
-                    <p>{mortgageData.monthlyPropertyTax ? formatter.format(mortgageData.monthlyPropertyTax) : '$0.00'}</p>
+                    <p>{rawData.monthlyPropertyTax ? formatter.format(rawData.monthlyPropertyTax) : '$0.00'}</p>
                   </div>
                   <div className='detail'>
                     <div>Monthly Home Insurance:</div>
-                    <p>{mortgageData.monthlyHomeInsurance ? formatter.format(mortgageData.monthlyHomeInsurance) : '$0.00'}</p>
+                    <p>{rawData.monthlyHomeInsurance ? formatter.format(rawData.monthlyHomeInsurance) : '$0.00'}</p>
                   </div>
                   <div className='detail'>
                     <div>Monthly PMI:</div>
-                    <p>{mortgageData.monthlyPMI ? formatter.format(mortgageData.monthlyPMI) : '$0.00'}</p>
+                    <p>{rawData.monthlyPMI ? formatter.format(rawData.monthlyPMI) : '$0.00'}</p>
                   </div>
                   <div className='detail'>
                     <div>Monthly HOA Fees:</div>
-                    <p>{calculatorData.hoaDuesPerMonth ? formatter.format(calculatorData.hoaDuesPerMonth) : '$0.00'}</p>
+                    <p>{calculatorData.hoaDuesPerMonth ? formatter.format(rawData.hoaDuesPerMonth) : '$0.00'}</p>
                   </div>
-                </div> */}
+                </div>
               </div>
               <div style={{ rowGap: '5%', width: '50%', display: 'flex', flexWrap: 'wrap', alignContent: 'flex-start' }}>
                 <div className='payment-breakdown-container' style={{ width: '100%' }}>
@@ -375,27 +397,27 @@ const Calculator = () => {
                   <div className='early-payoff-input' style={{ paddingBottom: '32px' }}>
                     <label htmlFor="increaseFrequency">Increase Frequency</label>
                     <div id='increaseFrequency'>
-                      <button className={`${options.increaseFrequencyOptions === 'Monthly' ? 'active' : ''}`} onClick={() => setOptions({ ...options, increaseFrequencyOptions: 'Monthly' })}>Monthly</button>
-                      <button className={`${options.increaseFrequencyOptions === 'Bi weekly' ? 'active' : ''}`} onClick={() => setOptions({ ...options, increaseFrequencyOptions: 'Bi weekly' })}>Bi weekly</button>
-                      <button className={`${options.increaseFrequencyOptions === 'Weekly' ? 'active' : ''}`} onClick={() => setOptions({ ...options, increaseFrequencyOptions: 'Weekly' })}>Weekly</button>
+                      <button className={`${options.increaseFrequencyOptions === 'Monthly' ? 'active' : ''}`} onClick={() => handleOptionChange('increaseFrequencyOptions', 'Monthly')}>Monthly</button>
+                      <button className={`${options.increaseFrequencyOptions === 'Bi weekly' ? 'active' : ''}`} onClick={() => handleOptionChange('increaseFrequencyOptions', 'Bi weekly')}>Bi weekly</button>
+                      <button className={`${options.increaseFrequencyOptions === 'Weekly' ? 'active' : ''}`} onClick={() => handleOptionChange('increaseFrequencyOptions', 'Weekly')}>Weekly</button>
                     </div>
                   </div>
                 </div>
-                {/* <div className='payment-breakdown-container' style={{ width: '100%' }}>
+                <div className='payment-breakdown-container' style={{ width: '100%' }}>
                   <h2>Lump Sum Payment</h2>
                   <div className='early-payoff-input'>
                     <label htmlFor="monthlyAdditional">Lump Sum Addition</label>
-                    <input type="text" id='monthlyAdditional' value={lumpSumAdditional} onChange={e => setLumpSumAdditional(e.target.value)} placeholder='You can add below $100k.00' />
+                    <input type="text" id='monthlyAdditional' value={lumpSumPaymentInput} onChange={e => setLumpSumPaymentInput(e.target.value)} placeholder='You can add below $100k.00' />
                   </div>
                   <div className='early-payoff-input' style={{ paddingBottom: '32px' }}>
                     <label htmlFor="increaseFrequency">Increase Frequency</label>
                     <div id='increaseFrequency'>
-                      <button className={`${options.increaseLumpSumOptions === 'One time' ? 'active' : ''}`} onClick={() => setOptions({ ...options, increaseLumpSumOptions: 'One time' })}>One time</button>
-                      <button className={`${options.increaseLumpSumOptions === 'Yearly' ? 'active' : ''}`} onClick={() => setOptions({ ...options, increaseLumpSumOptions: 'Yearly' })}>Yearly</button>
-                      <button className={`${options.increaseLumpSumOptions === 'Quarterly' ? 'active' : ''}`} onClick={() => setOptions({ ...options, increaseLumpSumOptions: 'Quarterly' })}>Quarterly</button>
+                      <button className={`${options.increaseLumpSumOptions === 'One time' ? 'active' : ''}`} onClick={() => handleOptionChange('increaseLumpSumOptions', 'One time')}>One time</button>
+                      <button className={`${options.increaseLumpSumOptions === 'Yearly' ? 'active' : ''}`} onClick={() => handleOptionChange('increaseLumpSumOptions', 'Yearly')}>Yearly</button>
+                      <button className={`${options.increaseLumpSumOptions === 'Quarterly' ? 'active' : ''}`} onClick={() => handleOptionChange('increaseLumpSumOptions', 'Quarterly')}>Quarterly</button>
                     </div>
                   </div>
-                </div> */}
+                </div>
               </div>
             </div>
           </div>
