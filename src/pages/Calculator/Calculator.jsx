@@ -19,7 +19,7 @@ const Calculator = () => {
     const temp = { ...options };
     temp[property] = value;
 
-    if (property === 'increaseFrequencyOptions') {
+    if (property === 'increaseFrequencyOptions' || property === 'increaseLumpSumOptions') {
       calculateSavings(value);
     }
     console.log({ property, value }, temp);
@@ -101,6 +101,8 @@ const Calculator = () => {
     const totalMonthlyPayment = monthlyPayment + propertyTaxMonthly + homeInsuranceMonthly + pmiMonthly + calculatorData.hoaDuesPerMonth + calculatorData.extraPaymentPerMonth;
     const totalPayment = totalMonthlyPayment * loanTermsInMonths();
     const totalInterest = monthlyPayment * loanTermsInMonths() - calculatorData.mortgageAmount;
+
+    setNewPaymentAmount(totalMonthlyPayment);
     setRawData({
       monthlyPMI: pmiMonthly,
       totalPayment: totalPayment,
@@ -192,33 +194,43 @@ const Calculator = () => {
 
     if (extraPayment) {
       value = parseFloat(extraPayment);
-    } else if (extraPaymentInput) {
-      value = parseFloat(extraPaymentInput);
     }
 
-    if (frequency == 'One time') {
-      const temp = rawData.monthlyPayment;
+    if (extraPaymentInput && extraPaymentInput != value) {
+      if (frequency === 'Bi weekly') {
+        value = value * 2;
+      }
+      else if (frequency === 'Weekly') {
+        value = value * 4;
+      }
     }
-    else if (frequency === 'Yearly') {
-      value = value / 12;
+    if (lumpSumPaymentInput && lumpSumPaymentInput != value) {
+      if (frequency === 'One time') {
+        mortgageAmount = mortgageAmount - value;
+        value = 0;
+      }
+      else if (frequency === 'Yearly') {
+        value = value / 12;
+      }
+      else if (frequency === 'Quarterly') {
+        value = value / 4;
+      }
     }
-    else if (frequency === 'Bi weekly') {
-      value = value * 2;
-    }
-    else if (frequency === 'Weekly') {
-      value = value * 4;
-    }
-
-    const temp = { ...rawData };
-    temp['extraPaymentPerMonth'] = value;
-    setRawData(temp);
 
     const newMonthlyPayment = rawData.monthlyPayment + value;
-    const reducedTerm = calculateReducedLoanTerm(newMonthlyPayment);
+    const reducedTerm = calculateReducedLoanTerm(newMonthlyPayment, mortgageAmount);
     const newTotalPayment = newMonthlyPayment * reducedTerm;
     const newTotalInterest = newTotalPayment - calculatorData.mortgageAmount;
     setAdditionalSaving(rawData.totalInterest - newTotalInterest);
-    setNewPaymentAmount(newMonthlyPayment);
+    
+    if(extraPaymentInput)  {
+      setNewPaymentAmount(rawData.totalMonthlyPayment + value);
+
+      const temp = { ...rawData };
+      temp['extraPaymentPerMonth'] = value;
+      setRawData(temp);
+    }
+
     setReducedLoanTerm(loanTermsInMonths(calculatorData.loanTerms) - reducedTerm);
     return rawData.totalInterest - newTotalInterest;
   }
@@ -392,7 +404,7 @@ const Calculator = () => {
                   <h2>Early Payoff Strategy</h2>
                   <div className='early-payoff-input'>
                     <label htmlFor="monthlyAdditional">Additional Monthly</label>
-                    <input type="text" id='monthlyAdditional' placeholder='You can add below $500.00' value={extraPaymentInput} onChange={e => setExtraPaymentInput(e.target.value)} onBlur={calculateSavings} />
+                    <input type="text" id='monthlyAdditional' placeholder='You can add below $500.00' value={extraPaymentInput} onChange={e => setExtraPaymentInput(e.target.value)} onBlur={(e) => calculateSavings(options.increaseFrequencyOptions, e.target.value)} />
                   </div>
                   <div className='early-payoff-input' style={{ paddingBottom: '32px' }}>
                     <label htmlFor="increaseFrequency">Increase Frequency</label>
@@ -407,7 +419,7 @@ const Calculator = () => {
                   <h2>Lump Sum Payment</h2>
                   <div className='early-payoff-input'>
                     <label htmlFor="monthlyAdditional">Lump Sum Addition</label>
-                    <input type="text" id='monthlyAdditional' value={lumpSumPaymentInput} onChange={e => setLumpSumPaymentInput(e.target.value)} placeholder='You can add below $100k.00' />
+                    <input type="text" id='monthlyAdditional' value={lumpSumPaymentInput} onChange={e => setLumpSumPaymentInput(e.target.value)} placeholder='You can add below $100k.00' onBlur={(e) => calculateSavings(options.increaseLumpSumOptions, e.target.value)} />
                   </div>
                   <div className='early-payoff-input' style={{ paddingBottom: '32px' }}>
                     <label htmlFor="increaseFrequency">Increase Frequency</label>
