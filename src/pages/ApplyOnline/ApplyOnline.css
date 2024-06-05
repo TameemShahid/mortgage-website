@@ -75,3 +75,26 @@
   border-top: 3px solid rgb(206, 206, 206);
   border-bottom: 3px solid rgb(206, 206, 206);
 }
+
+.apply-online-wrapper .section-2-content .input-group > input:focus {
+  border: 1px solid #0D7714 !important;
+  box-shadow: none;
+}
+
+.apply-online-wrapper .section-2-content .input-group > select {
+  border-radius: 0;
+}
+
+.apply-online-wrapper .section-2-content .input-group > select:focus {
+  border: 1px solid #0D7714 !important;
+  box-shadow: none;
+}
+
+.apply-online-wrapper .section-2-content > .row-group {
+  width: 100%;
+  gap: 3rem;
+  display: flex;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: space-between;
+}
