@@ -22,6 +22,7 @@ import ContactUs from './pages/ContactUs/ContactUs.jsx';
 import Blog from './pages/Blog/Blog.jsx';
 import Quote from './pages/Quote/Quote.jsx';
 import Calculator from './pages/Calculator/Calculator.jsx';
+import ApplyOnline from './pages/ApplyOnline/ApplyOnline.jsx';
 
 const App = () => {
    const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -65,6 +66,7 @@ const App = () => {
                <Route path='/learning-center' element={<Learn />} />
                <Route path='/calculator' element={<Calculator />} />
                <Route path='/pre-qualify' element={<PreQualify />} />
+               <Route path='/apply-online' element={<ApplyOnline />} />
                <Route path='/loan-options' element={<LoanOptions />} />
                <Route path='/meet-our-team' element={<MeetOurTeam />} />
                <Route path='/thank-you-for-mortgage-quote' element={<ThankYou />} />
