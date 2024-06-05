@@ -3,8 +3,10 @@ import { useEffect, useState } from 'react';
 import nameImg from '../../assets/apply_online/name.png';
 import phoneImg from '../../assets/apply_online/phone.png';
 import emailImg from '../../assets/apply_online/email.png';
+import incomeImg from '../../assets/apply_online/Income.png';
 import calendarImg from '../../assets/apply_online/d-o-b.png';
 import securityImg from '../../assets/apply_online/security.png';
+import officerImg from '../../assets/apply_online/loan_officer.png';
 
 const ApplyOnline = () => {
   const [formData, setFormData] = useState({
@@ -22,7 +24,8 @@ const ApplyOnline = () => {
     state: '',
     zipCode: '',
     addressDuration: '',
-    livingStatus: ''
+    livingStatus: '',
+    loanOfficer: '',
   });
   const dobMonthOptions = [
     'January',
@@ -199,6 +202,23 @@ const ApplyOnline = () => {
                     })
                   }
                 </select>
+              </div>
+            </div>
+            <h4>Loan Officer</h4>
+            <div className='row-group'>
+              <div className="input-group mb-3" style={{ paddingTop: '15px' }}>
+                <span className="input-group-text" id="basic-addon1" style={{ padding: '0', borderRadius: '0' }} ><img src={officerImg} alt="" srcSet="" /></span>
+                <select className="form-select" id="loanOfficer" onChange={handleInputChange}>
+                  <option selected>Please Select Your Loan Officer</option>
+                  <option>I Do Not Have One Yet</option>
+                </select>
+              </div>
+            </div>
+            <h4>Income</h4>
+            <div className='row-group'>
+              <div className="input-group mb-3" style={{ paddingTop: '15px' }}>
+                <span className="input-group-text" id="basic-addon1" style={{ padding: '0', borderRadius: '0' }} ><img src={incomeImg} alt="" srcSet="" /></span>
+                <input type="text" id='firstName' onChange={handleInputChange} className="form-control" placeholder="First Name..." aria-label="First Name" aria-describedby="basic-addon1" style={{ borderRadius: '0' }} />
               </div>
             </div>
           </div>
