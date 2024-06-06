@@ -66,7 +66,7 @@
   justify-content: center;
 }
 
-.apply-online-wrapper .section-2-content > h4 {
+.apply-online-wrapper .section-2-content h4 {
   width: 100%;
   padding: 8px;
   margin: 20px 0;
@@ -103,4 +103,32 @@
   flex-wrap: nowrap;
   align-content: center;
   justify-content: space-between;
+}
+
+#digital-signature-icon {
+  content: "";
+  border-color: #dbdbdb;
+  width: 35px;
+  color: #fff;
+  padding: 0;
+  text-align: center;
+  display: table-cell;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translate(0,0);
+  background: #0d7714 url(../../assets/apply_online/assets.png) no-repeat center;
+  background-color: transparent!important;
+  border: 1px solid #bbb;
+  border-right: 0;
+  width: 35px;
+  height: 180px;
+}
+
+#digital-signature-canvas {
+  border-width: 2px;
+  border-style: dotted;
+  border-color: rgb(0, 0, 0);
+  background-color: rgb(137, 137, 137);
+  cursor: url(../../assets/apply_online/pen.cur), pointer;
+  height: 180px;
+  width: 600px;
 }

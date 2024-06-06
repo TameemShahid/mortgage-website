@@ -58,9 +58,28 @@ const ApplyOnline = () => {
     coBorrowerZipCode: '',
     coBorrowerAddressDuration: '',
     coBorrowerLivingStatus: '',
+    coBorrowerGrossMonthlyIncome: '',
+    coBorrowerAdditionalMonthlyIncome: '',
+    coBorrowerAdditionalIncomeSource: '',
+    coBorrowerEmploymentStatus: '',
+    coBorrowerCheckingAsset: '',
+    coBorrowerSavingAsset: '',
+    coBorrowerRetirementFunds: '',
+    coBorrowerOtherAsset: '',
+    coBorrowerAdditionalRealEstateOwned: '',
+    coBorrowerMaritalStatus: '',
+    coBorrowerChildSupport: '',
+    coBorrowerVeteranStatus: '',
+    referral: '',
+    borrowerSignatureCheckbox: '',
+    digitalSignatureCheckbox: '',
+    digitalSignature: '',
   });
   const [showCoBorrowerForm, setShowCoBorrowerForm] = useState(false);
   const [showCoBorrowerAddressForm, setShowCoBorrowerAddressForm] = useState(true);
+  const [showSignatureForm, setShowSignatureForm] = useState(false);
+  const [digitalSignatureCheckbox, setDigitalSignatureCheckbox] = useState(false);
+
   const dobMonthOptions = [
     'January',
     'February',
@@ -106,6 +125,30 @@ const ApplyOnline = () => {
       } else {
         setShowCoBorrowerAddressForm(true);
       }
+    }
+
+    if (event.target.id === 'borrowerSignatureCheckbox') {
+      temp[event.target.id] = event.target.checked;
+
+      if (event.target.checked) {
+        setShowSignatureForm(true);
+      } else {
+        setShowSignatureForm(false);
+      }
+    }
+
+    if (event.target.id === 'digitalSignatureCheckbox') {
+      temp[event.target.id] = event.target.checked;
+
+      if (event.target.checked) {
+        setDigitalSignatureCheckbox(true);
+      } else {
+        setDigitalSignatureCheckbox(false);
+      }
+    }
+
+    if (event.target.id === 'digitalSignature') {
+      temp[event.target.id] = event.target.files[0];
     }
 
     setFormData(temp);
@@ -520,6 +563,131 @@ const ApplyOnline = () => {
                     </select>
                   </div>
                 </div>
+              </div>
+              <h4 className='alt-bg'>Income</h4>
+              <p className='alt-bg'><strong>Notice:</strong> Alimony, Child Support Or Separate Maintenance Income Need Not Be Revealed If The Borrower Or Co-Borrower Does Not Choose To Have It Considered For Repaying This Loan.</p>
+              <div className='row-group alt-bg'>
+                <div className="input-group mb-3" style={{ paddingTop: '15px' }}>
+                  <span className="input-group-text" id="basic-addon1" style={{ padding: '0', borderRadius: '0' }} ><img src={incomeImg} alt="" srcSet="" /></span>
+                  <input type="text" id='coBorrowerGrossMonthlyIncome' onChange={handleInputChange} className="form-control" placeholder="Gross Monthly Income $..." aria-label="Gross Monthly Income" aria-describedby="basic-addon1" style={{ borderRadius: '0' }} />
+                </div>
+              </div>
+              <div className='row-group alt-bg'>
+                <div className="input-group mb-3" style={{ paddingTop: '15px' }}>
+                  <span className="input-group-text" id="basic-addon1" style={{ padding: '0', borderRadius: '0' }} ><img src={incomeImg} alt="" srcSet="" /></span>
+                  <input type="text" id='coBorrowerAdditionalMonthlyIncome' onChange={handleInputChange} className="form-control" placeholder="Additional Monthly Income $..." aria-label="Additional Monthly Income" aria-describedby="basic-addon1" style={{ borderRadius: '0' }} />
+                </div>
+              </div>
+              <div className='row-group alt-bg'>
+                <div className="input-group mb-3" style={{ paddingTop: '15px' }}>
+                  <input type="text" id='coBorrowerAdditionalIncomeSource' onChange={handleInputChange} className="form-control" placeholder="Source of Additional Income" aria-label="Source of Additional Income" aria-describedby="basic-addon1" style={{ borderRadius: '0' }} />
+                </div>
+              </div>
+              <h4 className='alt-bg'>Employment Section</h4>
+              <div className='row-group alt-bg'>
+                <div className="input-group mb-3" style={{ paddingTop: '15px' }}>
+                  <span className="input-group-text" id="basic-addon1" style={{ padding: '0', borderRadius: '0' }} ><img src={officerImg} alt="" srcSet="" /></span>
+                  <select className="form-select" id="coBorrowerEmploymentStatus" onChange={handleInputChange}>
+                    <option selected>Employment Status</option>
+                    <option>Employed</option>
+                    <option>Self Employed</option>
+                  </select>
+                </div>
+              </div>
+              <h4 className='alt-bg'>Assets</h4>
+              <div className='row-group alt-bg'>
+                <div className="input-group mb-3" style={{ paddingTop: '15px' }}>
+                  <span className="input-group-text" id="basic-addon1" style={{ padding: '0', borderRadius: '0' }} ><img src={assetImg} alt="" srcSet="" /></span>
+                  <input type="text" id='coBorrowerCheckingAsset' onChange={handleInputChange} className="form-control" placeholder="Checking $..." aria-label="Checking Asset" aria-describedby="basic-addon1" style={{ borderRadius: '0' }} />
+                </div>
+              </div>
+              <div className='row-group alt-bg'>
+                <div className="input-group mb-3" style={{ paddingTop: '15px' }}>
+                  <span className="input-group-text" id="basic-addon1" style={{ padding: '0', borderRadius: '0' }} ><img src={assetImg} alt="" srcSet="" /></span>
+                  <input type="text" id='coBorrowerSavingAsset' onChange={handleInputChange} className="form-control" placeholder="Saving $..." aria-label="Saving Asset" aria-describedby="basic-addon1" style={{ borderRadius: '0' }} />
+                </div>
+              </div>
+              <div className='row-group alt-bg'>
+                <div className="input-group mb-3" style={{ paddingTop: '15px' }}>
+                  <span className="input-group-text" id="basic-addon1" style={{ padding: '0', borderRadius: '0' }} ><img src={assetImg} alt="" srcSet="" /></span>
+                  <input type="text" id='coBorrowerRetirementFunds' onChange={handleInputChange} className="form-control" placeholder="Retirement Funds $..." aria-label="Retirement Funds" aria-describedby="basic-addon1" style={{ borderRadius: '0' }} />
+                </div>
+              </div>
+              <div className='row-group alt-bg'>
+                <div className="input-group mb-3" style={{ paddingTop: '15px' }}>
+                  <span className="input-group-text" id="basic-addon1" style={{ padding: '0', borderRadius: '0' }} ><img src={assetImg} alt="" srcSet="" /></span>
+                  <input type="text" id='coBorrowerOtherAsset' onChange={handleInputChange} className="form-control" placeholder="Other $..." aria-label="Other Assets" aria-describedby="basic-addon1" style={{ borderRadius: '0' }} />
+                </div>
+              </div>
+              <h4 className='alt-bg'>Additional Real Estate Owned</h4>
+              <div className='row-group alt-bg'>
+                <div className="input-group mb-3" style={{ paddingTop: '15px' }}>
+                  <select className="form-select" id="coBorrowerAdditionalRealEstateOwned" onChange={handleInputChange}>
+                    <option selected>Do You Own Additional Real Estate?</option>
+                    <option>Yes</option>
+                    <option>No</option>
+                  </select>
+                </div>
+              </div>
+              <h4 className='alt-bg'>Additional Details</h4>
+              <div className='row-group alt-bg'>
+                <div className="input-group mb-3" style={{ paddingTop: '15px' }}>
+                  <select className="form-select" id="coBorrowerMaritalStatus" onChange={handleInputChange}>
+                    <option selected>Marital Status</option>
+                    <option>Unmarried</option>
+                    <option>Married</option>
+                    <option>Separated</option>
+                  </select>
+                </div>
+              </div>
+              <div className='row-group alt-bg'>
+                <div className="input-group mb-3" style={{ paddingTop: '15px' }}>
+                  <select className="form-select" id="coBorrowerChildSupport" onChange={handleInputChange}>
+                    <option selected>Do You Pay Child Support Or Alimony?</option>
+                    <option>Yes</option>
+                    <option>No</option>
+                  </select>
+                </div>
+              </div>
+              <div className='row-group alt-bg'>
+                <div className="input-group mb-3" style={{ paddingTop: '15px' }}>
+                  <select className="form-select" id="coBorrowerVeteranStatus" onChange={handleInputChange}>
+                    <option selected>Are You A Veteran?</option>
+                    <option>Yes</option>
+                    <option>No</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <h4>How Did You Hear About Us?</h4>
+            <div className='row-group'>
+              <div className="input-group mb-3" style={{ paddingTop: '15px' }}>
+                <select className="form-select" id="referral" onChange={handleInputChange}>
+                  <option selected>How Did You Hear About Us?</option>
+                  <option>Other</option>
+                  <option>Internet</option>
+                  <option>Friend</option>
+                  <option>Realtor</option>
+                  <option>Builder</option>
+                </select>
+              </div>
+            </div>
+            <h4>Authorization</h4>
+            <div style={{ width: '100%', marginBottom: '8px' }}>
+              <input type="checkbox" name="borrowerSignatureCheckbox" id="borrowerSignatureCheckbox" onChange={handleInputChange} /><strong style={{ paddingLeft: '5px' }}>{' '}Borrower Signature</strong>
+            </div>
+            <p style={{ paddingTop: '15px', marginBottom: '8px' }}>I understand that by submitting this online application, I am authorizing a credit check and to make whatever inquiries necessary in connection with this request.</p>
+            <div style={{ width: '100%', paddingTop: '15px', marginBottom: '8px', display: showSignatureForm ? 'block' : 'none' }}>
+              <input type="checkbox" name="digitalSignatureCheckbox" id="digitalSignatureCheckbox" onChange={handleInputChange} /><strong style={{ paddingLeft: '5px' }}>{' '}Click Here If You Want To Upload Digital Signature</strong>
+            </div>
+            <div style={{ width: '100%', paddingTop: '15px', marginBottom: '8px', display: digitalSignatureCheckbox ? 'block' : 'none' }}>
+              <input type="file" name="digitalSignature" id="digitalSignature" accept='image/png, image/jpeg, image/jpg' onChange={handleInputChange} />
+              <p style={{ padding: '7px 16px 0px 0px', fontSize: '11px' }}>Accepted File Types: Jpg, Png, Jpeg. Max File Size: 3MB.</p>
+            </div>
+            <div style={{ width: '100%', paddingTop: '15px', marginBottom: '8px', display: showSignatureForm ? digitalSignatureCheckbox ? 'none' : 'block' : 'none' }}>
+              <div style={{ width: '600px', height: '180px', display: 'flex' }}>
+                <div id='digital-signature-icon'></div>
+                <canvas id='digital-signature-canvas'></canvas>
               </div>
             </div>
           </div>
