@@ -76,6 +76,12 @@
   border-bottom: 3px solid rgb(206, 206, 206);
 }
 
+.apply-online-wrapper .section-2-content .alt-bg {
+  padding: 9px 20px;
+  margin-bottom: 15px;
+  background-color: #eeeeee;
+}
+
 .apply-online-wrapper .section-2-content .input-group > input:focus {
   border: 1px solid #0D7714 !important;
   box-shadow: none;
@@ -90,7 +96,7 @@
   box-shadow: none;
 }
 
-.apply-online-wrapper .section-2-content > .row-group {
+.apply-online-wrapper .section-2-content .row-group {
   width: 100%;
   gap: 3rem;
   display: flex;
