@@ -132,3 +132,34 @@
   height: 180px;
   width: 600px;
 }
+
+#government-form {
+  width: 100%;
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: nowrap;
+  border: 1px solid rgb(204, 204, 204);
+}
+
+#government-form > .column {
+  width: 100%;
+  padding: 0 7px;
+}
+
+#government-form .column > h4 {
+  margin-top: 0;
+  border-top: none;
+  text-align: start;
+  border-bottom: 1px solid #cecece;
+}
+
+#government-form > .column > div {
+  width: 100%;
+  margin: 5px 0;
+}
+
+#government-form .column .separator {
+  height: 1px;
+  margin: 10px 0px;
+  border-bottom: 1px solid #cecece;
+}

@@ -52,9 +52,9 @@ const MobileMenu = ({ isMenuOpen, toggleMenu }) => {
       <Link className='option-container' to='/contact-us'>
         Contact Us
       </Link>
-      <div className='option-container'>
+      <Link className='option-container' to='/apply-online'>
         Apply Online
-      </div>
+      </Link>
       <Link className='option-container' to='/quote'>
         Get a Quote
       </Link>

@@ -85,7 +85,7 @@ const Navbar = ({ toggleMenu, isMenuOpen }) => {
               </li>
               <li><Link to="/blogs">Blog</Link></li>
               <li><Link to="/contact-us">Contact Us</Link></li>
-              <li><button type="button" className='btn btn-info'>Apply Online</button></li>
+              <li><button type="button" className='btn btn-info' onClick={() => navigate('/apply-online')}>Apply Online</button></li>
               <li><button type="button" className='btn btn-info' onClick={() => navigate('/quote')}>Get A Quote</button></li>
             </ul>
           </div>
