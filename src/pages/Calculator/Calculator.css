@@ -45,6 +45,7 @@
   color: #6c8971;
   position: relative;
   padding-bottom: 20px;
+  cursor: pointer;
 }
 
 .calculator-wrapper .calc-option-container .calc-option.active {

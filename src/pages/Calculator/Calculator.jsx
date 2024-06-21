@@ -1,3 +1,4 @@
+import AffordabilityCalculator from '../../components/AffordabilityCalculator/AffordabilityCalculator';
 import DonutChart from '../../components/DonutChart/DonutChart';
 import './Calculator.css';
 import { useEffect, useLayoutEffect, useState } from 'react';
@@ -287,6 +288,7 @@ const Calculator = () => {
           <div className='section-1-content mx-auto'>
             <h2>Calculator</h2>
             <div className='calc-option-container'>
+              <div className={`calc-option ${options.activeOption === 'Affordability Calculator' ? 'active' : ''}`} onClick={() => handleOptionChange('activeOption', 'Affordability Calculator')}>Affordability Calculator</div>
               <div className={`calc-option ${options.activeOption === 'Purchase' ? 'active' : ''}`} onClick={() => handleOptionChange('activeOption', 'Purchase')}>Purhcase</div>
               <div className={`calc-option ${options.activeOption === 'Refinance' ? 'active' : ''}`} onClick={() => handleOptionChange('activeOption', 'Refinance')}>Refinance</div>
               <div className={`calc-option ${options.activeOption === 'Rent vs Buy' ? 'active' : ''}`} onClick={() => handleOptionChange('activeOption', 'Rent vs Buy')}>Rent vs Buy</div>
@@ -299,7 +301,7 @@ const Calculator = () => {
         </div>
         <div className='section-2-container'>
           <div className='section-2-content mx-auto'>
-            <div className='calculator'>
+            <div className='calculator' style={{ display: options.activeOption === 'Purchase' ? 'block' : 'none' }}>
               <div className='calculator-content'>
                 <h2>Purchase Calculator</h2>
                 <div className='calculator-form'>
@@ -359,7 +361,7 @@ const Calculator = () => {
                 </div>
               </div>
             </div>
-            <div className='details-wrapper'>
+            <div className='details-wrapper' style={{ display: options.activeOption === 'Purchase' ? 'flex' : 'none' }}>
               <div className='payment-details'>
                 <div className='details'>
                   <div>All Payment</div>
@@ -463,6 +465,7 @@ const Calculator = () => {
                 </div>
               </div>
             </div>
+            {options.activeOption === 'Affordability Calculator' && <AffordabilityCalculator />}
           </div>
         </div>
       </div>
