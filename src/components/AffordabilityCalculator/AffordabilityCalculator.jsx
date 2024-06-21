@@ -23,6 +23,9 @@ const AffordabilityCalculator = () => {
     homeInsuranceYearly: 1200,
     pmiYearly: 3000,
     hoaDuesMonthly: 0,
+    annualFhaDuration: 30,
+    upfrontMipPercentage: 1.75,
+    annualMipPercentage: 0.55
   });
 
   const handleOptionsChange = (option, optionValue) => {
@@ -63,6 +66,7 @@ const AffordabilityCalculator = () => {
       <div className='sub-calc-content'>
         <div className='sub-calc-details'>
 
+          {/* Gross Income and Monthly Debt Input Group */}
           <div className='input-group'>
             {/* Gross Income (Monthly) Input */}
             <div className='input-container'>
@@ -77,6 +81,7 @@ const AffordabilityCalculator = () => {
             </div>
           </div>
 
+          {/* Home Price and Down Payment Input Group */}
           <div className='input-group'>
             {/* Home Price Input */}
             <div className='input-container'>
@@ -99,6 +104,7 @@ const AffordabilityCalculator = () => {
             </div>
           </div>
 
+          {/* Loan Amount and Loan Term Input Group */}
           <div className='input-group'>
             {/* Loan Amount Input */}
             <div className='input-container'>
@@ -121,6 +127,7 @@ const AffordabilityCalculator = () => {
             </div>
           </div>
 
+          {/* Interest Rate and Credit Score Input Group */}
           <div className='input-group'>
             {/* Interest Rate Input */}
             <div className='input-container'>
@@ -129,7 +136,7 @@ const AffordabilityCalculator = () => {
             </div>
 
             {/* Credit Score Input */}
-            <div className='input-container'>
+            <div className='input-container' style={{ display: options.affordabilityOptions === 'FHA' ? 'none' : 'flex' }}>
               <label>Credit Score</label>
               <select value={calcData.interestRate} onChange={(e) => { handleCalcDataChange('interestRate', e.target.value) }}>
                 <option value="620-639">620-639</option>
@@ -142,8 +149,15 @@ const AffordabilityCalculator = () => {
                 <option value="760+">760 and above</option>
               </select>
             </div>
+
+            {/* Annual FHA Duration Input */}
+            <div className='input-container' style={{ display: options.affordabilityOptions === 'FHA' ? 'flex' : 'none' }}>
+              <label>Annual FHA Duration</label>
+              <input type='text' value={calcData.annualFhaDuration} onChange={(e) => { handleCalcDataChange('annualFhaDuration', e.target.value) }} />
+            </div>
           </div>
 
+          {/* Property Tax and Homeowners Insurance Input Group */}
           <div className='input-group'>
             {/* Prop Tax (Yearly) Input */}
             <div className='input-container'>
@@ -174,6 +188,7 @@ const AffordabilityCalculator = () => {
             </div>
           </div>
 
+          {/* PMI and HOA Dues Input Group */}
           <div className='input-group'>
             {/* PMI (Yearly) Input */}
             <div className='input-container'>
@@ -185,6 +200,21 @@ const AffordabilityCalculator = () => {
             <div className='input-container'>
               <label>HOA Dues (Monthly)</label>
               <input type='text' value={calcData.hoaDuesMonthly} onChange={(e) => { handleCalcDataChange('hoaDuesMonthly', e.target.value) }} />
+            </div>
+          </div>
+
+          {/* Upfront MIP and Annual MIP Group */}
+          <div className='input-group' style={{ display: options.affordabilityOptions === 'FHA' ? 'flex' : 'none' }}>
+            {/* Upfront MIP Input */}
+            <div className='input-container'>
+              <label>Upfront MIP (%)</label>
+              <input type='text' value={calcData.upfrontMipPercentage} onChange={(e) => { handleCalcDataChange('upfrontMipPercentage', e.target.value) }} />
+            </div>
+
+            {/* Annual MIP Input */}
+            <div className='input-container'>
+              <label>Annual MIP (%)</label>
+              <input type='text' value={calcData.annualMipPercentage} onChange={(e) => { handleCalcDataChange('annualMipPercentage', e.target.value) }} />
             </div>
           </div>
 

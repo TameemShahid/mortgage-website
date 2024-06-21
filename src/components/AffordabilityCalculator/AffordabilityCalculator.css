@@ -109,6 +109,7 @@
   -webkit-appearance: none; /* Remove default arrow in Safari */
   -moz-appearance: none; /* Remove default arrow in Firefox */
 
+  width: 100%;
   border: none;
   padding: 16px;
   font-size: 13px;
