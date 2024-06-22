@@ -7,7 +7,8 @@ const AffordabilityCalculator = () => {
     downPaymentOptions: '$',
     loanTermOptions: 'Year',
     propTaxYearly: '%',
-    homeInsuranceYearly: '$'
+    homeInsuranceYearly: '$',
+    paymentFrequency: 'Year'
   });
 
   const [calcData, setCalcData] = useState({
@@ -25,7 +26,11 @@ const AffordabilityCalculator = () => {
     hoaDuesMonthly: 0,
     annualFhaDuration: 30,
     upfrontMipPercentage: 1.75,
-    annualMipPercentage: 0.55
+    annualMipPercentage: 0.55,
+    VAfundingStatus: 'First Time Use of a VA Loan',
+    VAfundingFee: 2.15,
+    finalMortgageAmount: 200000,
+    firstPaymentDate: new Date().toISOString().split('T')[0]
   });
 
   const handleOptionsChange = (option, optionValue) => {
@@ -85,7 +90,7 @@ const AffordabilityCalculator = () => {
           <div className='input-group'>
             {/* Home Price Input */}
             <div className='input-container'>
-              <label>Home Price</label>
+              <label>{options.affordabilityOptions === 'VA' ? 'Home Value' : 'Home Price'}</label>
               <input type='text' value={calcData.homePrice} onChange={(e) => { handleCalcDataChange('homePrice', e.target.value) }} />
             </div>
 
@@ -108,7 +113,7 @@ const AffordabilityCalculator = () => {
           <div className='input-group'>
             {/* Loan Amount Input */}
             <div className='input-container'>
-              <label>Loan Amount</label>
+              <label>{options.affordabilityOptions === 'VA' ? 'Base Mortgage Amount' : 'Loan Amount'}</label>
               <input type='text' value={calcData.loanAmount} onChange={(e) => { handleCalcDataChange('loanAmount', e.target.value) }} />
             </div>
 
@@ -135,8 +140,27 @@ const AffordabilityCalculator = () => {
               <input type='text' value={calcData.interestRate} onChange={(e) => { handleCalcDataChange('interestRate', e.target.value) }} />
             </div>
 
+            {/* Payment Frequency Input */}
+            <div className='input-container' style={{ display: options.affordabilityOptions === 'VA' ? 'block' : 'none' }}>
+              <label>Payment Frequency</label>
+              <div className='input-options' style={{ width: '48%' }}>
+                <label htmlFor="" style={{ width: '50%' }} className={options.paymentFrequency === 'Year' ? 'btn btn-primary active' : 'btn btn-primary'} onClick={(e) => handleOptionsChange('paymentFrequency', 'Year')}>
+                  Year
+                </label>
+                <label htmlFor="" style={{ width: '50%' }} className={options.paymentFrequency === 'Month' ? 'btn btn-primary active' : 'btn btn-primary'} onClick={(e) => handleOptionsChange('paymentFrequency', 'Month')}>
+                  Month
+                </label>
+              </div>
+            </div>
+
+            {/* HOA Dues (Monthly) Input */}
+            <div className='input-container' style={{ display: options.affordabilityOptions === 'USDA' ? 'flex' : 'none' }}>
+              <label>HOA Dues (Monthly)</label>
+              <input type='text' value={calcData.hoaDuesMonthly} onChange={(e) => { handleCalcDataChange('hoaDuesMonthly', e.target.value) }} />
+            </div>
+
             {/* Credit Score Input */}
-            <div className='input-container' style={{ display: options.affordabilityOptions === 'FHA' ? 'none' : 'flex' }}>
+            <div className='input-container' style={{ display: ['FHA', 'VA', 'USDA', 'Jumbo'].includes(options.affordabilityOptions) ? 'none' : 'flex' }}>
               <label>Credit Score</label>
               <select value={calcData.interestRate} onChange={(e) => { handleCalcDataChange('interestRate', e.target.value) }}>
                 <option value="620-639">620-639</option>
@@ -157,13 +181,33 @@ const AffordabilityCalculator = () => {
             </div>
           </div>
 
+          {/* VA Funding Fee and VA Funding status Input Group */}
+          <div className='input-group'>
+            {/* VA Funding Status Input */}
+            <div className='input-container' style={{ display: options.affordabilityOptions === 'VA' ? 'flex' : 'none' }}>
+              <label>This is my...</label>
+              <select value={calcData.VAfundingStatus} onChange={(e) => { handleCalcDataChange('VAfundingStatus', e.target.value) }}>
+                <option value="First Time Use of a VA Loan">First Time Use of a VA Loan</option>
+                <option value="I Have Used a VA Loan Before">I Have Used a VA Loan Before</option>
+                <option value="I am exempt from the VA funding fees">I am exempt from the VA funding fees</option>
+              </select>
+            </div>
+
+            {/* VA Funding Fees Input */}
+            <div className='input-container' style={{ display: options.affordabilityOptions === 'VA' ? 'flex' : 'none' }}>
+              <label>VA Funding Fee</label>
+              <input type='text' value={calcData.VAfundingFee} onChange={(e) => { handleCalcDataChange('VAfundingFee', e.target.value) }} />
+            </div>
+
+          </div>
+
           {/* Property Tax and Homeowners Insurance Input Group */}
           <div className='input-group'>
             {/* Prop Tax (Yearly) Input */}
-            <div className='input-container'>
+            <div className='input-container' style={{ position: 'relative' }}>
               <label>Property Tax (Yearly)</label>
               <input type='text' value={calcData.propTaxYearly} onChange={(e) => { handleCalcDataChange('propTaxYearly', e.target.value) }} />
-              <div className='input-options' style={{ right: '12.1rem' }}>
+              <div className='input-options'>
                 <label htmlFor="" className={options.propTaxYearly === '$' ? 'btn btn-primary active' : 'btn btn-primary'} onClick={(e) => handleOptionsChange('propTaxYearly', '$')}>
                   $
                 </label>
@@ -188,18 +232,30 @@ const AffordabilityCalculator = () => {
             </div>
           </div>
 
-          {/* PMI and HOA Dues Input Group */}
-          <div className='input-group'>
+          {/* PMI, Final Mortgage Amount, HOA Dues, and First Payment Date Input Group */}
+          <div className='input-group' style={{ display: options.affordabilityOptions === 'USDA' ? 'none' : 'grid' }}>
             {/* PMI (Yearly) Input */}
-            <div className='input-container'>
+            <div className='input-container' style={{ display: ['FHA', 'VA'].includes(options.affordabilityOptions) ? 'none' : 'flex' }}>
               <label>PMI (Yearly)</label>
               <input type='text' value={calcData.pmiYearly} onChange={(e) => { handleCalcDataChange('pmiYearly', e.target.value) }} />
+            </div>
+
+            {/* Final Mortgage Amount Input */}
+            <div className='input-container' style={{ display: options.affordabilityOptions === 'VA' ? 'flex' : 'none' }}>
+              <label>Final Mortgage Amount</label>
+              <input type='text' value={calcData.finalMortgageAmount} onChange={(e) => { handleCalcDataChange('finalMortgageAmount', e.target.value) }} />
             </div>
 
             {/* HOA Dues (Monthly) Input */}
             <div className='input-container'>
               <label>HOA Dues (Monthly)</label>
               <input type='text' value={calcData.hoaDuesMonthly} onChange={(e) => { handleCalcDataChange('hoaDuesMonthly', e.target.value) }} />
+            </div>
+
+            {/* First Payment Date Input */}
+            <div className='input-container' style={{ display: ['VA'].includes(options.affordabilityOptions) ? 'flex' : 'none' }}>
+              <label>First Payment Date</label>
+              <input type='date' value={calcData.firstPaymentDate} onChange={(e) => { handleCalcDataChange('firstPaymentDate', e.target.value) }} />
             </div>
           </div>
 
