@@ -260,7 +260,7 @@ const AffordabilityCalculator = () => {
           </div>
 
           {/* Upfront MIP and Annual MIP Group */}
-          <div className='input-group' style={{ display: options.affordabilityOptions === 'FHA' ? 'flex' : 'none' }}>
+          <div className='input-group' style={{ display: options.affordabilityOptions === 'FHA' ? 'grid' : 'none' }}>
             {/* Upfront MIP Input */}
             <div className='input-container'>
               <label>Upfront MIP (%)</label>
