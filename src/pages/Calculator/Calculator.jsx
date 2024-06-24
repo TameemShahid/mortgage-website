@@ -1,7 +1,7 @@
 import AffordabilityCalculator from '../../components/AffordabilityCalculator/AffordabilityCalculator';
 import DonutChart from '../../components/DonutChart/DonutChart';
 import './Calculator.css';
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 const Calculator = () => {
   const [submitButton, setSubmitButton] = useState(true);
@@ -14,7 +14,14 @@ const Calculator = () => {
     ownersInsurance: '$',
     paymentBreakdown: 'Monthly Payment',
     increaseFrequencyOptions: 'Monthly',
-    increaseLumpSumOptions: 'One time'
+    increaseLumpSumOptions: 'One time',
+
+    affordabilityOptions: 'Conventional',
+    downPaymentOptions: '$',
+    loanTermOptions: 'Year',
+    propTaxYearly: '%',
+    homeInsuranceYearly: '$',
+    paymentFrequency: 'Year'
   });
   const handleOptionChange = (property, value) => {
     const temp = { ...options };
@@ -28,7 +35,6 @@ const Calculator = () => {
       calculateLumpSumSavings(value);
     }
 
-    console.log({ property, value }, temp);
     setOptions(temp);
   };
 
@@ -281,6 +287,51 @@ const Calculator = () => {
     setCalculatorData(temp);
   }
 
+  useEffect(() => {
+    console.log(calculatorData);
+  }, [calculatorData])
+
+
+  const [calcData, setCalcData] = useState({
+    grossIncome: 5000,
+    monthlyDebts: 1500,
+    homePrice: 200000,
+    downPayment: 0,
+    loanAmount: 200000,
+    loanTerm: 30,
+    interestRate: 5,
+    creditScore: 700,
+    propTaxYearly: 0.6,
+    homeInsuranceYearly: 1200,
+    pmiYearly: 3000,
+    hoaDuesMonthly: 0,
+    annualFhaDuration: 30,
+    upfrontMipPercentage: 1.75,
+    annualMipPercentage: 0.55,
+    VAfundingStatus: 'First Time Use of a VA Loan',
+    VAfundingFee: 2.15,
+    finalMortgageAmount: 200000,
+    firstPaymentDate: new Date().toISOString().split('T')[0]
+  });
+
+  const handleOptionsChange = (option, optionValue) => {
+    const temp = { ...options };
+    temp[option] = optionValue;
+    setOptions(temp);
+  }
+
+  const [purchasePriceSliderValue, setPurchasePriceSliderValue] = useState(200000);
+  const [downPaymentSliderValue, setDownPaymentSliderValue] = useState(40000);
+
+  const handleSliderChange = (event) => {
+    const value = parseInt(event.target.value);
+    if (event.target.id === 'down-payment-slider') {
+      setDownPaymentSliderValue(value);
+    } else if (event.target.id === 'purchase-price-slider') {
+      setPurchasePriceSliderValue(value);
+    }
+  };
+
   return (
     <div id='calculator-container' className='main-content'>
       <div className='calculator-wrapper'>
@@ -465,7 +516,13 @@ const Calculator = () => {
                 </div>
               </div>
             </div>
-            {options.activeOption === 'Affordability Calculator' && <AffordabilityCalculator />}
+            {options.activeOption === 'Affordability Calculator' && <AffordabilityCalculator
+              options={options} setOptions={setOptions} calcData={calculatorData}
+              setCalcData={setCalcData} handleOptionsChange={handleOptionsChange}
+              handleInputChange={handleInputChange} getChartData={getChartData}
+              rawData={rawData} purchasePriceSliderValue={purchasePriceSliderValue}
+              downPaymentSliderValue={downPaymentSliderValue} handleSliderChange={handleSliderChange}
+              formatter={formatter} />}
           </div>
         </div>
       </div>
