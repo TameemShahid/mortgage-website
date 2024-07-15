@@ -1,5 +1,6 @@
 import AffordabilityCalculator from '../../components/AffordabilityCalculator/AffordabilityCalculator';
 import DonutChart from '../../components/DonutChart/DonutChart';
+import RefinanceCalculator from '../../components/RefinanceCalculator/RefinanceCalculator';
 import './Calculator.css';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
@@ -21,7 +22,10 @@ const Calculator = () => {
     loanTermOptions: 'Year',
     propTaxYearly: '%',
     homeInsuranceYearly: '$',
-    paymentFrequency: 'Year'
+    paymentFrequency: 'Year',
+
+    originalLoanTerm: 'Year',
+    newLoanTerm: 'Year',
   });
   const handleOptionChange = (property, value) => {
     const temp = { ...options };
@@ -311,7 +315,8 @@ const Calculator = () => {
     VAfundingStatus: 'First Time Use of a VA Loan',
     VAfundingFee: 2.15,
     finalMortgageAmount: 200000,
-    firstPaymentDate: new Date().toISOString().split('T')[0]
+    firstPaymentDate: new Date().toISOString().split('T')[0],
+    originalLoanAmount: 0,
   });
 
   const handleOptionsChange = (option, optionValue) => {
@@ -517,7 +522,14 @@ const Calculator = () => {
               </div>
             </div>
             {options.activeOption === 'Affordability Calculator' && <AffordabilityCalculator
-              options={options} setOptions={setOptions} calcData={calculatorData}
+              options={options} setOptions={setOptions} calcData={calcData}
+              setCalcData={setCalcData} handleOptionsChange={handleOptionsChange}
+              handleInputChange={handleInputChange} getChartData={getChartData}
+              rawData={rawData} purchasePriceSliderValue={purchasePriceSliderValue}
+              downPaymentSliderValue={downPaymentSliderValue} handleSliderChange={handleSliderChange}
+              formatter={formatter} />}
+            {options.activeOption === 'Refinance' && <RefinanceCalculator
+              options={options} setOptions={setOptions} calcData={calcData}
               setCalcData={setCalcData} handleOptionsChange={handleOptionsChange}
               handleInputChange={handleInputChange} getChartData={getChartData}
               rawData={rawData} purchasePriceSliderValue={purchasePriceSliderValue}

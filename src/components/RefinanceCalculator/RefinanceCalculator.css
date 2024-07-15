@@ -1,0 +1,340 @@
+.refinance-calc-container {
+  color: white;
+  padding: 32px 0px;
+  margin-right: 15px;
+  border-radius: 24px;
+  background-color: #282828;
+}
+
+.refinance-calc-container .title > h2 {
+  font-size: 22px;
+  font-weight: 500;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.refinance-calc-container .content-padding-wrapper {
+  padding: 0px 32px;
+}
+
+.refinance-calc-container .content-padding-wrapper h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 16px;
+  line-height: 24px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.refinance-calc-container .content-padding-wrapper .question > .btn-group {
+  width: 100%;
+  padding: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 277px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.refinance-calc-container
+  .content-padding-wrapper
+  .question
+  .btn-group
+  > label {
+  margin: 0;
+  width: 100%;
+  border: none;
+  position: relative;
+  padding: 12px 16px;
+  border-radius: 8px;
+  padding-left: 40px;
+  margin-bottom: 4px;
+  background-color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.refinance-calc-container
+  .content-padding-wrapper
+  .question
+  .btn-group
+  > label.active {
+  color: #282828 !important;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.refinance-calc-container
+  .content-padding-wrapper
+  .question
+  .btn-group
+  > label
+  > .checkmark {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  height: 16px;
+  width: 16px;
+  background-color: transparent;
+  border-radius: 50%;
+  border: 2px solid #6c8971;
+}
+
+.refinance-calc-container .question .btn-group > label > .radio-input {
+  position: absolute;
+  top: 15px;
+  left: 16px;
+  height: 16px;
+  width: 16px;
+  background-color: transparent;
+  border-radius: 50%;
+  border: 2px solid #6c8971;
+}
+
+.refinance-calc-container
+  .question
+  .btn-group
+  > label
+  > .radio-input:checked::before {
+  content: '';
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #282828; /* Color for the checked state */
+  position: absolute;
+  top: 4px;
+  left: 4px;
+}
+
+.refinance-calc-container .content-padding-wrapper .input-group-custom > label {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  margin-bottom: 12px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.refinance-calc-container .content-padding-wrapper .input-group-custom > input {
+  padding: 16px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  width: 100%;
+  border: none;
+  margin-bottom: 20px;
+  font-family: 'Poppins';
+  line-height: 24px;
+  box-shadow: none !important;
+}
+
+.refinance-calc-container
+  .content-padding-wrapper
+  .input-group-custom
+  > .btn-group-custom {
+  position: absolute;
+  right: 4px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  top: 41px;
+}
+
+.refinance-calc-container
+  .content-padding-wrapper
+  .input-group-custom
+  > .btn-group-custom
+  > label {
+  position: relative;
+  float: left;
+  color: rgba(255, 255, 255, 0.8);
+  background-color: transparent;
+  padding: 12px 16px;
+  margin: 0;
+  border-radius: 8px;
+  border: none;
+  border: none;
+}
+
+.refinance-calc-container
+  .content-padding-wrapper
+  .input-group-custom
+  > .btn-group-custom
+  > label.active {
+  color: #282828 !important;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.refinance-calc-container .button-wrapper {
+  padding: 0 32px;
+}
+
+.refinance-calc-container .button-wrapper .email-button {
+  background-color: #fff;
+  padding: 16px;
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 24px;
+  color: #282828;
+  border-radius: 8px;
+  text-transform: uppercase;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.refinance-details {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  -webkit-column-gap: 15px;
+  -moz-column-gap: 15px;
+  column-gap: 32px;
+  height: fit-content;
+  width: 100%;
+}
+
+.refinance-details .info-block {
+  border-radius: 16px;
+  padding: 24px 32px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: #edfdef;
+}
+
+.refinance-details .info-block > span {
+  font-weight: 600;
+  font-size: 16px;
+  color: #282828;
+  line-height: 24px;
+}
+
+.refinance-details .dual-info-block {
+  margin-top: 32px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 15px 1fr;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  text-align: center;
+  padding: 0;
+}
+
+.refinance-details .info-block > h4 {
+  margin: 8px 0;
+  font-weight: 600;
+}
+
+.refinance-details .card-item {
+  border: 3px solid #edfdef;
+  border-radius: 16px;
+  margin-top: 32px;
+}
+
+.refinance-details .card-item > .card-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 32px;
+}
+
+.refinance-details .card-item > .card-title > h4 {
+  margin: 0;
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.refinance-details .card-item .card-details {
+  padding: 0 20px 0px 20px;
+}
+
+.refinance-details .card-item .card-details .progress-label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.refinance-details .card-item .card-details .progress-label > p {
+  margin: 0;
+  font-weight: 800;
+  color: #38423a;
+  font-size: 14px;
+}
+
+.refinance-details .card-item .card-details .progress-label > span {
+  margin: 0;
+  font-weight: 800;
+  color: #000000;
+  font-size: 14px;
+}
+
+.refinance-details .card-item .progress-bar {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  background-color: #e2e3e5;
+}
+
+.refinance-details .card-item .progress-bar .progress {
+  width: 59.2%;
+  height: 40px;
+  background-color: #38423a;
+  transition: width 500ms linear;
+}
+
+@media screen and (max-width: 1760px) {
+  .refinance-calc-container .content-padding-wrapper {
+    padding: 0px 20px;
+  }
+
+  .refinance-calc-container
+    .content-padding-wrapper
+    .input-group-custom
+    > label {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .refinance-calc-container
+    .content-padding-wrapper
+    .input-group-custom
+    > input {
+    font-size: 13px;
+  }
+
+  .refinance-calc-container .button-wrapper {
+    padding: 0 20px;
+  }
+
+  .refinance-details {
+    -webkit-column-gap: 15px;
+    -moz-column-gap: 15px;
+    column-gap: 15px;
+  }
+
+  .refinance-details .info-block {
+    padding: 16px 12px;
+  }
+
+  .refinance-details .info-block > span {
+    font-size: 14px;
+  }
+
+  .refinance-details .card-item > .card-title {
+    padding: 20px;
+  }
+}
